@@ -13,6 +13,8 @@ namespace CarCrash.Models
 
         }
 
-        public DbSet<Crash> Crashes { get; set; }
+        public virtual DbSet<Crash> crashes { get; set; }
+        public virtual DbSet<Location> locations { get; set; }
+        public virtual DbSet<Road> roads { get; set; }
     }
 }

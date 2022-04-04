@@ -1,4 +1,4 @@
-﻿// using CarCrash.Models;
+﻿using CarCrash.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,9 +11,10 @@ namespace CarCrash.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private ICarCrashRepository repo { get; set; }
+        public HomeController(ICarCrashRepository temp)
         {
-            
+            repo = temp;
         }
 
         public IActionResult Index()
@@ -23,7 +24,24 @@ namespace CarCrash.Controllers
 
         public IActionResult Data()
         {
-            return View();
+            var Crashes = repo.Crashes.ToList();
+            List<Location> Locations = repo.Locations.ToList();
+            List<int> locations = new List<string>();
+            Crash crash;
+
+            foreach (Crash c in Crashes) 
+            {
+                foreach (Location l in Locations)
+                {
+                    if (l.LOCATION_ID == c.LOCATION_ID)
+                    {
+                        locations.Add(l.LOCATION_ID);
+                    }
+                }
+            }
+
+
+            return View(Crashes);
         }
         public IActionResult Prediction()
         {

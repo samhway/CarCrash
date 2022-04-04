@@ -31,14 +31,15 @@ namespace CarCrash
             {
                 options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
             });
-            services.AddDbContext<RoadDbContext>(options =>
-            {
-                options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
-            });
-            services.AddDbContext<RoadDbContext>(options =>
-            {
-                options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
-            });
+            services.AddScoped<ICarCrashRepository, EFCarCrashRepository>();
+            //services.AddDbContext<RoadDbContext>(options =>
+            //{
+            //    options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
+            //});
+            //services.AddDbContext<RoadDbContext>(options =>
+            //{
+            //    options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
