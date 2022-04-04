@@ -1,4 +1,4 @@
-﻿// using CarCrash.Models;
+﻿using CarCrash.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,9 +11,8 @@ namespace CarCrash.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        public HomeController(CrashDbContext temp)
         {
-            
         }
 
         public IActionResult Index()

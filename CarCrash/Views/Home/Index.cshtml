@@ -2,39 +2,44 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <div class="row m-4">
-        <div class="container">
+<div class="mt-5">
+    <div class="row text-center">
+        <div class="col">
             <h1 style="color: #313715;">UTAH AUTO INCIDENT PORTAL</h1>
             <img width="25%" src="~/img/carcrash.png" />
         </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <h3>Welcome to the Utah Auto Incident Portal</h3>
-            <p>Select a link below to get started: </p>
+        <div class="col">
+            <h3>Select a link below to get started: </h3>
             <ul class="list-group border-dark">
-                <a class="text-primary" asp-controller="Home" asp-action="Data">
+                <a class="text-primary mt-3" asp-controller="Home" asp-action="Data">
                 <li class="list-group-item">
                     View all data
                 </li>
                 </a>
-                <a class="text-primary" asp-controller="Home" asp-action="Summary">
+                <a class="text-primary mt-3" asp-controller="Home" asp-action="Summary">
                 <li class="list-group-item">
                     View data summaries
                 </li>
                 </a>
-                <a class="text-primary" asp-controller="Home" asp-action="Prediction">
+                <a class="text-primary mt-3" asp-controller="Home" asp-action="Prediction">
                 <li class="list-group-item">
                     View data predictions
                 </li>
                 </a>
             </ul>
         </div>
+    </div>
+
+    <hr class="mt-5 mb-5"/>
+
+    <div class="row">
         <div class="col">
-            <div class="container">
-                <img src="~/img/crash.jpg" width="80%" />
-            </div>
+            <p>In recent years, the state of Utah has been taking extra measures to prevent motor vehicle accidents. </p>
+            <p>In order to help this initiative, we have created this easy-to-use web app for anyone to learn more about the crisis.</p>
+            <p>We hope every day users can learn from the data and know what they can do to help and officials can better get the data they need for use.</p>
+        </div>
+        <div class="col text-center">
+            <img src="~/img/crash.jpg" width="80%" />
         </div>
     </div>
 </div>
