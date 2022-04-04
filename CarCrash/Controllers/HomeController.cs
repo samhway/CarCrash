@@ -25,22 +25,21 @@ namespace CarCrash.Controllers
         public IActionResult Data()
         {
             var Crashes = repo.Crashes.ToList();
-            List<Location> Locations = repo.Locations.ToList();
-            List<int> locations = new List<string>();
-            Crash crash;
+            //List<Location> Locations = repo.Locations.ToList();
+            //List<string> locations = new List<string>();
 
-            foreach (Crash c in Crashes) 
-            {
-                foreach (Location l in Locations)
-                {
-                    if (l.LOCATION_ID == c.LOCATION_ID)
-                    {
-                        locations.Add(l.LOCATION_ID);
-                    }
-                }
-            }
+            //foreach (Crash c in Crashes) 
+            //{
+            //    foreach (Location l in Locations)
+            //    {
+            //        if (l.LOCATION_ID == c.LOCATION_ID)
+            //        {
+            //            locations.Add(l.CITY + ", " + l.COUNTY_NAME);
+            //        }
+            //    }
+            //}
 
-
+            //ViewBag.locations = locations;
             return View(Crashes);
         }
         public IActionResult Prediction()

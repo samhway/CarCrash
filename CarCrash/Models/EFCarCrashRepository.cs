@@ -14,7 +14,7 @@ namespace CarCrash.Models
             context = temp;
         }
         public IQueryable<Crash> Crashes => context.crashes;
-        public IQueryable<Location> Locations => context.Locations;
-        public IQueryable<Road> Roads => context.Roads;
+        public IQueryable<Location> Locations => context.locations;
+        public IQueryable<Road> Roads => context.roads;
     }
 }
