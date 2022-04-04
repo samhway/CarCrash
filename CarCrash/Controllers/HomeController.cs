@@ -1,4 +1,4 @@
-﻿using CarCrash.Models;
+﻿// using CarCrash.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,11 +11,9 @@ namespace CarCrash.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController()
         {
-            _logger = logger;
+            
         }
 
         public IActionResult Index()
@@ -23,15 +21,17 @@ namespace CarCrash.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Data()
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Prediction()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
+        }
+        public IActionResult Summary()
+        {
+            return View();
         }
     }
 }

@@ -3,6 +3,38 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="row m-4">
+        <div class="container">
+            <h1 style="color: #313715;">UTAH AUTO INCIDENT PORTAL</h1>
+            <img width="25%" src="~/img/carcrash.png" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <h3>Welcome to the Utah Auto Incident Portal</h3>
+            <p>Select a link below to get started: </p>
+            <ul class="list-group border-dark">
+                <a class="text-primary" asp-controller="Home" asp-action="Data">
+                <li class="list-group-item">
+                    View all data
+                </li>
+                </a>
+                <a class="text-primary" asp-controller="Home" asp-action="Summary">
+                <li class="list-group-item">
+                    View data summaries
+                </li>
+                </a>
+                <a class="text-primary" asp-controller="Home" asp-action="Prediction">
+                <li class="list-group-item">
+                    View data predictions
+                </li>
+                </a>
+            </ul>
+        </div>
+        <div class="col">
+            <div class="container">
+                <img src="~/img/crash.jpg" width="80%" />
+            </div>
+        </div>
+    </div>
 </div>
