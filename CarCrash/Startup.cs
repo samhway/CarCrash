@@ -67,7 +67,15 @@ namespace CarCrash
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "Paging", //We can give whatever name we want to the endpoint
+                    pattern: "{pageNum}", //Go see and check if it matches the number of pageNum, it also once it finds that pattern will then just write the number instead of pageNum=2
+                                          //We can also add something to the pattern where if it doesn't find the pattern, it will print it in the url...
+                                          // like "Page{pageNum}
+                    defaults: new { Controller = "Home", action = "Data", pageNum = 1 } //We don't have to include the "defaults: " part
+    );
             });
+
         }
     }
 }

@@ -3,96 +3,99 @@
 *@
 @{
 }
-@model List<Crash>
+@model CrashesViewModel
 
 <h1>DATA</h1>
 
 <table class="table table-bordered table-responsive">
     <thead class="bg-primary text-white">
-        <th>
-            Crash Datetime
-        </th>
-        <th>
-            Route
-        </th>
-        <th>
-            Mile Point
-        </th>
-        <th>
-            Lattitude
-        </th>
-        <th>
-            Longitude
-        </th>
-        <th>
-            Road Name
-        </th>
-        <th>
-            Location
-        </th>
-        <th>
-            Crash Severity
-        </th>
-        <th>
-            Work Zone Related?
-        </th>
-        <th>
-            Pedestrian Involved?
-        </th>
-        <th>
-            Cyclist Involved?
-        </th>
-        <th>
-            Motorcycle Involved?
-        </th>
-        <th>
-            Improper Restraint?
-        </th>
-        <th>
-            Unrestrained?
-        </th>
-        <th>
-            DUI?
-        </th>
-        <th>
-            Intersection Related?
-        </th>
-        <th>
-            Wild Animal Related?
-        </th>
-        <th>
-            Domestic Animal Related?
-        </th>
-        <th>
-            Overturned Rollover?
-        </th>
-        <th>
-            Commercial Vehicle Involved?
-        </th>
-        <th>
-            Teenage Driver Involved?
-        </th>
-        <th>
-            Older Driver Involved?
-        </th>
-        <th>
-            Night Condition?
-        </th>
-        <th>
-            Single Vehicle?
-        </th>
-        <th>
-            Distracted Driving?
-        </th>
-        <th>
-            Drowsy Driving?
-        </th>
-        <th>
-            Roadway Departure?
-        </th>
+        <tr>
+            <th>
+                Crash Datetime
+            </th>
+            <th>
+                Route
+            </th>
+            <th>
+                Mile Point
+            </th>
+            <th>
+                Lattitude
+            </th>
+            <th>
+                Longitude
+            </th>
+            <th>
+                Road Name
+            </th>
+            <th>
+                Location
+            </th>
+            <th>
+                Crash Severity
+            </th>
+            <th>
+                Work Zone Related?
+            </th>
+            <th>
+                Pedestrian Involved?
+            </th>
+            <th>
+                Cyclist Involved?
+            </th>
+            <th>
+                Motorcycle Involved?
+            </th>
+            <th>
+                Improper Restraint?
+            </th>
+            <th>
+                Unrestrained?
+            </th>
+            <th>
+                DUI?
+            </th>
+            <th>
+                Intersection Related?
+            </th>
+            <th>
+                Wild Animal Related?
+            </th>
+            <th>
+                Domestic Animal Related?
+            </th>
+            <th>
+                Overturned Rollover?
+            </th>
+            <th>
+                Commercial Vehicle Involved?
+            </th>
+            <th>
+                Teenage Driver Involved?
+            </th>
+            <th>
+                Older Driver Involved?
+            </th>
+            <th>
+                Night Condition?
+            </th>
+            <th>
+                Single Vehicle?
+            </th>
+            <th>
+                Distracted Driving?
+            </th>
+            <th>
+                Drowsy Driving?
+            </th>
+            <th>
+                Roadway Departure?
+            </th>
+        </tr>
+        
     </thead>
     <tbody>
-        @foreach (Crash c in Model)
+        @foreach (Crash c in Model.Crashes)
             {
         <tr>
             <td>@c.CRASH_DATETIME</td>
@@ -126,3 +129,6 @@
             }
     </tbody>
 </table>
+<div class="btn-group pull-right m-1" page-blah="@Model.PageInfo" page-action="Data" page-class="btn" 
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+     page-classes-enabled="true">blob</div>
