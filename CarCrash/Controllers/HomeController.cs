@@ -50,5 +50,28 @@ namespace CarCrash.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.loc = repo.Locations.ToList();
+            ViewBag.road = repo.Roads.ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Crash c)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Data");
+            }
+            else
+            {
+                return View();
+            }
+
+        }
     }
 }
