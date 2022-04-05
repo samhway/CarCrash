@@ -1,4 +1,5 @@
 ﻿using CarCrash.Models;
+using CarCrash.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,13 +23,34 @@ namespace CarCrash.Controllers
             return View();
         }
 
-        public IActionResult Data()
+        public IActionResult Data(int crashSeverity, int pageNum = 1)
         {
-            var Crashes = repo.Crashes.ToList();
+            int pageSize = 10;
+
+            var x = new CrashesViewModel
+            {
+                Crashes = repo.Crashes.
+                OrderBy(p => p.CRASH_DATETIME)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumCrashes = repo.Crashes.Count(),
+                    CrashesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+           
             List<Location> Locations = repo.Locations.ToList();
             List<Road> Roads = repo.Roads.ToList();
             Dictionary<int, string> locations = new Dictionary<int, string>();
             Dictionary<int, string> roads = new Dictionary<int, string>();
+
+            var Crashes = repo.Crashes.
+            OrderBy(p => p.CRASH_DATETIME)
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize);
 
             foreach (Crash c in Crashes)
             {
@@ -54,7 +76,7 @@ namespace CarCrash.Controllers
 
             ViewBag.locations = locations;
             ViewBag.roads = roads;
-            return View(Crashes);
+            return View(x);
         }
         public IActionResult Prediction()
         {
