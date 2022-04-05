@@ -5,77 +5,6 @@
 
 <form method="post">
     <div class="form-group">
-
-            <div asp-validation-summary="All"></div>
-            <label asp-for="CRASH_ID">Crash ID: </label><br />
-            <input asp-for="CRASH_ID" /><br />
-            <label asp-for="CRASH_DATETIME">DateTime (YYYY-MM-DD HH-MM): </label><br />
-            <input asp-for="CRASH_DATETIME" /><br />
-            <label asp-for="Minute">Minute: </label><br />
-            <input asp-for="Minute" /><br />
-            <label asp-for="Hour">Hour (24Hr): </label><br />
-            <input asp-for="Hour" /><br />
-            <label asp-for="Year">Year: </label><br />
-            <input asp-for="Year" /><br />
-            <label asp-for="Month">Month: </label><br />
-            <input asp-for="Month" /><br />
-            <label asp-for="Day">Day: </label><br />
-            <input asp-for="Day" /><br />
-            <label asp-for="ROUTE">Route: </label><br />
-            <input asp-for="ROUTE" /><br />
-            <label asp-for="MILEPOINT">MILEPOINT: </label><br />
-            <input asp-for="MILEPOINT" /><br />
-            <label asp-for="LAT_UTM_Y">Latitude (UTM): </label><br />
-            <input asp-for="LAT_UTM_Y" /><br />
-            <label asp-for="LONG_UTM_X">Longitude (UTM): </label><br />
-            <input asp-for="LONG_UTM_X" /><br />
-            <label asp-for="ROAD_ID">Road: </label><br />
-            <select asp-for="ROAD_ID">
-                @foreach (var r in ViewBag.road)
-                {
-                    @if (r.MAIN_ROAD_NAME is null)
-                    {
-                        <option value=@r.ROAD_ID>NULL</option>
-                    }
-                    else
-                    {
-                        <option value=@r.ROAD_ID>@r.MAIN_ROAD_NAME</option>
-                    }
-                }
-            </select>
-            <small class="form-text text-muted">Not finding the road? Add a new road <a target="_blank" asp-controller="Home" asp-action="Roads">here</a></small>
-            <label asp-for="LOCATION_ID">Location: </label><br />
-            <select asp-for="LOCATION_ID">
-                @foreach (var r in ViewBag.loc)
-                {
-                    @if (r.CITY is null & r.COUNTY_NAME is null)
-                    {
-                        <option value=@r.LOCATION_ID>NULL, NULL</option>
-                    }
-                    else if (r.COUNTY_NAME is null)
-                    {
-                        <option value=@r.LOCATION_ID>@r.CITY, NULL</option>
-                    }
-                    else if (r.CITY is null)
-                    {
-                        <option value=@r.LOCATION_ID>NULL, @r.COUNTY_NAME</option>
-                    }
-                    else
-                    {
-                        <option value=@r.LOCATION_ID>@r.CITY, @r.COUNTY_NAME</option>
-                    }
-                }
-            </select>
-            <small class="form-text text-muted">Not finding the location? Add a new location <a target="_blank" asp-controller="Home" asp-action="Locations">here</a></small>
-            <label asp-for="CRASH_SEVERITY_ID">Crash Severity: </label><br />
-            <select asp-for="CRASH_SEVERITY_ID">
-                <option value=1>No Injury</option>
-                <option value=2>Possible Injury</option>
-                <option value=3>Suspected Minor Injury</option>
-                <option value=4>Suspected Serious Injury</option>
-                <option value=5>Fatal</option>
-            </select><br />
-        </div>
         <div asp-validation-summary="All"></div>
         <label asp-for="CRASH_ID">Crash ID: </label><br />
         <input asp-for="CRASH_ID" /><br />
@@ -112,7 +41,8 @@
                     <option value=@r.ROAD_ID>@r.MAIN_ROAD_NAME</option>
                 }
             }
-        </select><br />
+        </select>
+        <small class="form-text text-muted">Not finding the road? Add a new road <a target="_blank" asp-controller="Home" asp-action="Roads">here</a></small>
         <label asp-for="LOCATION_ID">Location: </label><br />
         <select asp-for="LOCATION_ID">
             @foreach (var r in ViewBag.loc)
@@ -134,7 +64,8 @@
                     <option value=@r.LOCATION_ID>@r.CITY, @r.COUNTY_NAME</option>
                 }
             }
-        </select><br />
+        </select>
+        <small class="form-text text-muted">Not finding the location? Add a new location <a target="_blank" asp-controller="Home" asp-action="Locations">here</a></small>
         <label asp-for="CRASH_SEVERITY_ID">Crash Severity: </label><br />
         <select asp-for="CRASH_SEVERITY_ID">
             <option value=1>No Injury</option>
