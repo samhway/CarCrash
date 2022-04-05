@@ -86,5 +86,42 @@ namespace CarCrash.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.loc = repo.Locations.ToList();
+            ViewBag.road = repo.Roads.ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Crash c)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Data");
+            }
+            else
+            {
+                return View();
+            }
+
+        }
+
+        public IActionResult Locations(int LocationId = 0)
+        {
+            Location Location = repo.Locations.FirstOrDefault(x => x.LOCATION_ID == LocationId);
+
+            return View(Location);
+        }
+
+        public IActionResult Roads(int RoadId = 0)
+        {
+            Road Road = repo.Roads.FirstOrDefault(x => x.ROAD_ID == RoadId);
+
+            return View(Road);
+        }
     }
 }
