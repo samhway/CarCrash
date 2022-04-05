@@ -64,5 +64,19 @@ namespace CarCrash.Controllers
         {
             return View();
         }
+
+        public IActionResult Locations(int LocationId = 0)
+        {
+            Location Location = repo.Locations.FirstOrDefault(x => x.LOCATION_ID == LocationId);
+
+            return View(Location);
+        }
+
+        public IActionResult Roads(int RoadId = 0)
+        {
+            Road Road = repo.Roads.FirstOrDefault(x => x.ROAD_ID == RoadId);
+
+            return View(Road);
+        }
     }
 }
