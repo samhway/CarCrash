@@ -1,17 +1,18 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    ViewData["Title"] = "Roads";
+﻿@{
+    ViewData["Title"] = "New Road";
 }
 @model Road
 
-<h1>Roads Form</h1>
+<h3 class="my-3">Add new road</h3>
+
 <form>
     <div class="form-group">
         <input type="hidden" asp-for="@Model.ROAD_ID" />
-        <label asp-for="@Model.MAIN_ROAD_NAME">Main Road Name:</label>
+        <label asp-for="@Model.MAIN_ROAD_NAME">Main Road Name:</label><br />
         <input asp-for="@Model.MAIN_ROAD_NAME" /><br />
-        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-success" action="submit">Submit</button>
     </div>
 </form>
