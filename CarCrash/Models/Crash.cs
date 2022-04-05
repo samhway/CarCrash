@@ -18,9 +18,9 @@ namespace CarCrash.Models
         public int Month { get; set; }
         public int Day { get; set; }
         public string ROUTE { get; set; }
-        public decimal MILEPOINT { get; set; }
-        public decimal LAT_UTM_Y { get; set; }
-        public decimal LONG_UTM_X { get; set; }
+        public decimal ?MILEPOINT { get; set; }
+        public decimal ?LAT_UTM_Y { get; set; }
+        public decimal ?LONG_UTM_X { get; set; }
         public int ROAD_ID { get; set; }
         public int LOCATION_ID { get; set; }
         public int CRASH_SEVERITY_ID { get; set; }
