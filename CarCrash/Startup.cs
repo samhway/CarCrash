@@ -33,9 +33,13 @@ namespace CarCrash
             {
                 options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
             });
+            services.AddDbContext<UserDbContext>(options =>
+            {
+                options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
+            });
 
-            //services.AddIdentity<IdentityUser, IdentityRole>()
-                //.AddEntityFrameworkStores<UserDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<UserDbContext>();
 
             services.AddScoped<ICarCrashRepository, EFCarCrashRepository>();
             services.Configure<IdentityOptions>(options =>
