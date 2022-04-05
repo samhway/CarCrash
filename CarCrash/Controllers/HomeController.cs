@@ -87,27 +87,13 @@ namespace CarCrash.Controllers
         }
 
         [HttpPost]
-        public IActionResult Prediction(string lat, string lon)
+        public IActionResult Prediction(string lon, string lat, string lon2, string lat2)
         {
-            string coor = lat + ',' + lon;
+            string coor = lon + ',' + lat;
+            string coor2 = lon2 + ',' + lat2;
+            string url = 'mapapidos.herokuapp.com/' + coor + '/' + coor2;
 
-            ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = "C:\\Python27\\python.exe";
-            Console.Write(2);
 
-            start.Arguments = string.Format("{0} {1} {2}", "scripts/map.py", lat, lon);
-            start.UseShellExecute = false;
-            start.RedirectStandardOutput = true;
-            using (Process process = Process.Start(start))
-            {
-                using (StreamReader reader = process.StandardOutput)
-                {
-                    string result = reader.ReadToEnd();
-                    Console.Write(result);
-
-                }
-            }
-            Console.Read();
 
             return View();
         }
