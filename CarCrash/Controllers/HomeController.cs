@@ -78,8 +78,37 @@ namespace CarCrash.Controllers
             ViewBag.roads = roads;
             return View(x);
         }
+
+        [HttpGet]
         public IActionResult Prediction()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Prediction(string lat, string lon)
+        {
+            string coor = lat + ',' + lon;
+
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = "C:\\Python27\\python.exe";
+            Console.Write(2);
+
+            start.Arguments = string.Format("{0} {1} {2}", 'map.py', args[1], args[2]);
+            start.UseShellExecute = false;
+            start.RedirectStandardOutput = true;
+            using (Process process = Process.Start(start))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string result = reader.ReadToEnd();
+                    // this prints 11
+                    Console.Write(result);
+
+                }
+            }
+            Console.Read();
+
             return View();
         }
         public IActionResult Summary()
