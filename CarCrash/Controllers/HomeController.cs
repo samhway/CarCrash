@@ -65,6 +65,29 @@ namespace CarCrash.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.loc = repo.Locations.ToList();
+            ViewBag.road = repo.Roads.ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Crash c)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Data");
+            }
+            else
+            {
+                return View();
+            }
+
+        }
+
         public IActionResult Locations(int LocationId = 0)
         {
             Location Location = repo.Locations.FirstOrDefault(x => x.LOCATION_ID == LocationId);
