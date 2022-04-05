@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -94,7 +95,7 @@ namespace CarCrash.Controllers
             start.FileName = "C:\\Python27\\python.exe";
             Console.Write(2);
 
-            start.Arguments = string.Format("{0} {1} {2}", 'map.py', args[1], args[2]);
+            start.Arguments = string.Format("{0} {1} {2}", "scripts/map.py", lat, lon);
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             using (Process process = Process.Start(start))
@@ -102,7 +103,6 @@ namespace CarCrash.Controllers
                 using (StreamReader reader = process.StandardOutput)
                 {
                     string result = reader.ReadToEnd();
-                    // this prints 11
                     Console.Write(result);
 
                 }
