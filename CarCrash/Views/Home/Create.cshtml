@@ -41,7 +41,8 @@
                         <option value=@r.ROAD_ID>@r.MAIN_ROAD_NAME</option>
                     }
                 }
-            </select><br />
+            </select>
+            <small class="form-text text-muted">Not finding the road? Add a new road <a target="_blank" asp-controller="Home" asp-action="Roads">here</a></small>
             <label asp-for="LOCATION_ID">Location: </label><br />
             <select asp-for="LOCATION_ID">
                 @foreach (var r in ViewBag.loc)
@@ -63,7 +64,8 @@
                         <option value=@r.LOCATION_ID>@r.CITY, @r.COUNTY_NAME</option>
                     }
                 }
-            </select><br />
+            </select>
+            <small class="form-text text-muted">Not finding the location? Add a new location <a target="_blank" asp-controller="Home" asp-action="Locations">here</a></small>
             <label asp-for="CRASH_SEVERITY_ID">Crash Severity: </label><br />
             <select asp-for="CRASH_SEVERITY_ID">
                 <option value=1>No Injury</option>
