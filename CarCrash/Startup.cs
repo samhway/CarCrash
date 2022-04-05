@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,10 @@ namespace CarCrash
                 options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
             });
             services.AddScoped<ICarCrashRepository, EFCarCrashRepository>();
+
+            services.AddSingleton<InferenceSession>(
+              new InferenceSession("Models/crash_severity.onnx")
+            );
             //services.AddDbContext<RoadDbContext>(options =>
             //{
             //    options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
