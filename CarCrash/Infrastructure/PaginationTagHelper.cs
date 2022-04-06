@@ -38,7 +38,32 @@ namespace CarCrash.Infrastructure
 
             TagBuilder final = new TagBuilder("div");
 
-            for (int i = 1; i < (PageBlah.TotalPages + 1); i++)
+            var addLinks = 5;
+            var subLinks = 4;
+            if(PageBlah.CurrentPage > 4)
+            {
+                TagBuilder tc = new TagBuilder("a");
+                tc.Attributes.Add("readonly", "readonly");
+                tc.InnerHtml.AppendHtml("...");
+                tc.AddCssClass(PageClass);
+                tc.AddCssClass(PageClassNormal);
+                final.InnerHtml.AppendHtml(tc);
+            }
+            if(PageBlah.CurrentPage < 5)
+            {
+                subLinks = (PageBlah.CurrentPage - 1);
+                addLinks = (9 - subLinks);
+            }
+            else if(PageBlah.CurrentPage > 25005)
+            {
+                addLinks = (25010 - PageBlah.CurrentPage);
+                subLinks = (9-addLinks);
+
+            }
+            var firstLink = (PageBlah.CurrentPage - subLinks);
+            var lastLink = (PageBlah.CurrentPage + addLinks);
+
+            for (int i = firstLink; i < lastLink; i++)
             {
                 TagBuilder tb = new TagBuilder("a");
                 tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i }); //This sets up our href, we're going to pagenumber i
@@ -53,6 +78,25 @@ namespace CarCrash.Infrastructure
                 final.InnerHtml.AppendHtml(tb);
 
             }
+            if (PageBlah.CurrentPage < 25005)
+            {
+                TagBuilder td = new TagBuilder("a");
+                td.Attributes.Add("readonly", "readonly");
+                td.InnerHtml.AppendHtml("...");
+                td.AddCssClass(PageClass);
+                td.AddCssClass(PageClassNormal);
+                final.InnerHtml.AppendHtml(td);
+            }
+
+
+
+
+            if (PageBlah.CurrentPage > 5)
+            {
+
+            }
+
+            //final.InnerHtml.AppendHtml();
 
             tho.Content.AppendHtml(final.InnerHtml);
 
