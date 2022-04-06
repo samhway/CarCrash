@@ -35,7 +35,7 @@ namespace CarCrash
             services.AddScoped<ICarCrashRepository, EFCarCrashRepository>();
 
             services.AddSingleton<InferenceSession>(
-              new InferenceSession("Models/crash_severity.onnx")
+              new InferenceSession("Models/crash.onnx")
             );
             //services.AddDbContext<RoadDbContext>(options =>
             //{
