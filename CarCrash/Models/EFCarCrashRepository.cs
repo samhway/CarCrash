@@ -16,5 +16,14 @@ namespace CarCrash.Models
         public IQueryable<Crash> Crashes => context.crashes;
         public IQueryable<Location> Locations => context.locations;
         public IQueryable<Road> Roads => context.roads;
+
+        public void Create(Crash c)
+        {
+            
+            context.crashes.Add(c);
+            
+
+            context.SaveChanges();
+        }
     }
 }

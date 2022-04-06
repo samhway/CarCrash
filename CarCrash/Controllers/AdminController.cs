@@ -93,7 +93,8 @@ namespace CarCrash.Controllers
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Data");
+                repo.Create(c);
+                return RedirectToPage("/Admin/Data");
             }
             else
             {

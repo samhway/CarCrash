@@ -6,7 +6,7 @@
 
 <h3 class="my-3">Add new crash</h3>
 
-<form method="post">
+<form method="post" asp-controller="Admin" asp-action="Create">
     <div class="form-group">
         <div asp-validation-summary="All"></div>
         <label asp-for="CRASH_ID">Crash ID: </label><br />
