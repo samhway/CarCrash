@@ -35,14 +35,13 @@ namespace CarCrash
             {
                 options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
             });
-            services.AddDbContext<UserDbContext>(options =>
-            {
-                options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
-            });
+
+            services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseMySql(Configuration["ConnectionStrings:IdentityDbConnection"]));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<UserDbContext>();
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             services.AddAuthorization(options =>
             {
