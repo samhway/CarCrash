@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,7 @@ namespace CarCrash
             });
 
             services.AddScoped<ICarCrashRepository, EFCarCrashRepository>();
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Default Password settings.
@@ -78,6 +80,9 @@ namespace CarCrash
                 //options.SlidingExpiration = true;
             //});
 
+            services.AddSingleton<InferenceSession>(
+              new InferenceSession("Models/crash.onnx")
+            );
 
             //services.AddDbContext<RoadDbContext>(options =>
             //{
