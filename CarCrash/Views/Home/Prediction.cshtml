@@ -4,18 +4,44 @@
 
 <h1>put model stuff here. 455 things</h1>
 
-<form method="post">
-    <h4>Starting location</h4>
-    <label>Longitude</label>
-    <input id="lat" type="text" />
-    <label>Latitude</label>
-    <input id="lon" type="text" />
+<h4>Starting location</h4>
+<label>Longitude</label>
+<input id="lon" type="text" />
+<label>Latitude</label>
+<input id="lat" type="text" />
 
-    <h4>Ending location</h4>
-    <label>Longitude</label>
-    <input id="lat2" type="text" />
-    <label>Latitude</label>
-    <input id="lon2" type="text" />
+<h4>Ending location</h4>
+<label>Longitude</label>
+<input id="lon2" type="text" />
+<label>Latitude</label>
+<input id="lat2" type="text" />
 
-    <button action="submit">Predict</button>
-</form>
+
+<button onclick="api()" href="#">Predict</button>
+
+<script>
+    function api(){
+        console.log("hello")
+
+        var lon = document.getElementById('lon').value;
+        var lat = document.getElementById('lat').value;
+        var lon2 = document.getElementById('lon2').value;
+        var lat2 = document.getElementById('lat2').value;
+
+        coor1 = lon + ',' + lat;
+        coor2 = lon2 + ',' + lat2;
+
+        url = "https://mapapidos.herokuapp.com/" + coor1 + '/' + coor2;
+
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
+        fetch(url, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+    }
+</script>

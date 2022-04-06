@@ -86,17 +86,11 @@ namespace CarCrash.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Prediction(string lon, string lat, string lon2, string lat2)
-        {
-            string coor = lon + ',' + lat;
-            string coor2 = lon2 + ',' + lat2;
-            string url = 'mapapidos.herokuapp.com/' + coor + '/' + coor2;
-
-
-
-            return View();
-        }
+        //[HttpPost]
+        //public IActionResult Prediction()
+        //{
+        //    return View();
+        //}
         public IActionResult Summary()
         {
             return View();
