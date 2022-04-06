@@ -28,6 +28,7 @@ namespace CarCrash
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddDbContext<CrashDbContext>(options =>
             {
@@ -39,7 +40,14 @@ namespace CarCrash
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminRole",
+                     policy => policy.RequireRole("Admin"));
+            });
 
             services.AddScoped<ICarCrashRepository, EFCarCrashRepository>();
             services.Configure<IdentityOptions>(options =>
@@ -58,17 +66,17 @@ namespace CarCrash
                 options.User.RequireUniqueEmail = false;
             });
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-                options.Cookie.Name = "YourAppCookieName";
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-                options.LoginPath = "/Identity/Account/Login";
+            //services.ConfigureApplicationCookie(options =>
+            //{
+                //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                //options.Cookie.Name = "YourAppCookieName";
+                //options.Cookie.HttpOnly = true;
+                //options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                //options.LoginPath = "/Identity/Account/Login";
                 // ReturnUrlParameter requires 
-                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-                options.SlidingExpiration = true;
-            });
+                //options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                //options.SlidingExpiration = true;
+            //});
 
 
             //services.AddDbContext<RoadDbContext>(options =>
@@ -114,6 +122,9 @@ namespace CarCrash
                                           // like "Page{pageNum}
                     defaults: new { Controller = "Home", action = "Data", pageNum = 1 } //We don't have to include the "defaults: " part
                     );
+                endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
 
         }

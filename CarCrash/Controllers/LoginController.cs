@@ -40,7 +40,7 @@ namespace CarCrash.Controllers
                     {
                         if (u.AdminAccess == true)
                         {
-                            return Redirect("/admin");
+                            return RedirectToAction("Admin", "Admin");
                         }
                         else
                         {
