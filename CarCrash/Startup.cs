@@ -53,6 +53,7 @@ namespace CarCrash
 
             services.Configure<IdentityOptions>(options =>
             {
+
                 // Default Password settings.
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -80,7 +81,7 @@ namespace CarCrash
             //});
 
             services.AddSingleton<InferenceSession>(
-              new InferenceSession("Models/crash.onnx")
+              new InferenceSession("wwwroot/crash.onnx")
             );
 
             //services.AddDbContext<RoadDbContext>(options =>
@@ -115,6 +116,13 @@ namespace CarCrash
             app.UseAuthorization();
 
             app.UseStatusCodePagesWithRedirects("~/error");
+
+            //This is the CSP header stuff. If anything is broken comment this out to debug.
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; style-src 'self' 'unsafe-inline'; style-src-elem * 'unsafe-inline'; script-src 'self' maps.googleapis.com; script-src-elem * 'unsafe-inline'; connect-src https://maps.googleapis.com/; frame-src 'self' https://public.tableau.com/; font-src *; img-src 'self' https://*.googleapis.com https://*.gstatic.com *.google.com  *.googleusercontent.com https://public.tableau.com/ data:");
+                await next();
+            });
 
             app.UseEndpoints(endpoints =>
             {
