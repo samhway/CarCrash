@@ -50,6 +50,77 @@ namespace CarCrash.Controllers
             return View();
         }
 
+        public IActionResult FilterData(bool WSRel, bool PedInv, bool CycInv, bool MotInv, bool ImpRes, bool IntRel, bool DUI, bool Unr, bool AniRel, bool DomAniRel, bool OveRol, int pageNum = 1)
+        {
+            int pageSize = 10;
+
+            var x = new CrashesViewModel
+            {
+                Crashes = repo.Crashes.
+                OrderBy(p => p.CRASH_DATETIME)
+                .Where(p => p.WORK_ZONE_RELATED == WSRel)
+                .Where(p => p.PEDESTRIAN_INVOLVED == PedInv)
+                .Where(p => p.BICYCLIST_INVOLVED == CycInv)
+                .Where(p => p.MOTORCYCLE_INVOLVED == MotInv)
+                .Where(p => p.IMPROPER_RESTRAINT == ImpRes)
+                .Where(p => p.DUI == DUI)
+                .Where(p => p.UNRESTRAINED == Unr)
+                .Where(p => p.INTERSECTION_RELATED == IntRel)
+                .Where(p => p.OVERTURN_ROLLOVER == OveRol)
+                .Where(p => p.DOMESTIC_ANIMAL_RELATED == DomAniRel)
+                .Where(p => p.WILD_ANIMAL_RELATED == AniRel)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumCrashes = repo.Crashes.Count(),
+                    CrashesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+
+            };
+            List<Location> Locations = repo.Locations.ToList();
+            List<Road> Roads = repo.Roads.ToList();
+            Dictionary<int, string> locations = new Dictionary<int, string>();
+            Dictionary<int, string> roads = new Dictionary<int, string>();
+
+            var Crashes = repo.Crashes.
+            OrderBy(p => p.CRASH_DATETIME)
+            .Where(p => p.WORK_ZONE_RELATED == WSRel)
+            .Where(p => p.PEDESTRIAN_INVOLVED == PedInv)
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize);
+
+            foreach (Crash c in Crashes)
+            {
+                foreach (Location l in Locations)
+                {
+                    if (l.LOCATION_ID == c.LOCATION_ID)
+                    {
+                        locations[l.LOCATION_ID] = l.CITY + ", " + l.COUNTY_NAME;
+                    }
+                }
+            }
+
+            foreach (Crash c in Crashes)
+            {
+                foreach (Road r in Roads)
+                {
+                    if (r.ROAD_ID == c.ROAD_ID)
+                    {
+                        roads[r.ROAD_ID] = r.MAIN_ROAD_NAME;
+                    }
+                }
+            }
+
+            ViewBag.locations = locations;
+            ViewBag.roads = roads;
+            return View("data", x);
+        }
+
+
+
         public IActionResult Data(int crashSeverity, int pageNum = 1)
         {
             int pageSize = 10;
