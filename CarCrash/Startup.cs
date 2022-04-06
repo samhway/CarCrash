@@ -114,6 +114,8 @@ namespace CarCrash
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseStatusCodePagesWithRedirects("~/error");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
