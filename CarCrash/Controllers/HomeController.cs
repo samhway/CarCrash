@@ -7,6 +7,7 @@ using Microsoft.ML.OnnxRuntime.Tensors;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -108,12 +109,19 @@ namespace CarCrash.Controllers
             ViewBag.roads = roads;
             return View(x);
         }
+
         [HttpGet]
         public IActionResult Prediction()
         {
             ViewBag.Prediction = null;
             return View();
         }
+
+        //[HttpPost]
+        //public IActionResult Prediction()
+        //{
+        //    return View();
+        //}
         public IActionResult Summary()
         {
             return View();
