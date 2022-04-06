@@ -1,6 +1,100 @@
 ﻿@{
     ViewData["Title"] = "Predictions";
-}
+} 
+@model Crashd
+<style>
+    label {
+        display: inline-block;
+        text-align: right;
+    }
+</style>
+<h1>put model stuff here. 455 things</h1>
+
+<div class="container">
+    <form method="post">
+        <div class="form-group d-inline-block">
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="pedestrian_involved" class="d-inline-block">Will there be a pedestrian involved? </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="pedestrian_involved" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="bicyclist_involved" class="d-inline-block">Will there be a bicyclist involved? </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="bicyclist_involved" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="motorcycle_involved" class="d-inline-block">Will there be a motorcycle involved? </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="motorcycle_involved" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="improper_restraint">Are anyone's seatbelts improperly fastened and/or not up to code? </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="improper_restraint" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="unrestrained">Are anyone's seatbelts not fastened?</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="unrestrained" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="dui">Has anyone been drinking during this car ride? </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="dui" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="overturn_rollover">Has the car been overturned? </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="overturn_rollover" />
+                </div>
+            </div><br />
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="intersection_related">Is the crash in an intersection? </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="intersection_related" />
+                </div>
+            </div>         
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-success" action="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
+@if (ViewBag.Prediction is null)
+            {
+                <p></p>
+            }
+else
+{
+                <p>@ViewBag.Prediction/5</p>
+                <p>1 comes out to no injury, 2 is a possible injury, 3 is a suspected minor injury, 4 is a suspected serious injury, and 5 is fatal</p>
+            }
+
 
 <h1>put model stuff here. 455 things</h1>
 

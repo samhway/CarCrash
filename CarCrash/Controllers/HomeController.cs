@@ -2,22 +2,52 @@
 using CarCrash.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace CarCrash.Controllers
 {
     public class HomeController : Controller
     {
+        private InferenceSession _session;
+
+
+
+
+
         private ICarCrashRepository repo { get; set; }
-        public HomeController(ICarCrashRepository temp)
+        public HomeController(ICarCrashRepository temp, InferenceSession session)
         {
             repo = temp;
+            _session = session;
         }
+        [HttpPost]
+        public ActionResult Prediction(Crashd data)
+        {
+            var result = _session.Run(new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())
+            });
+            Tensor<float> score = result.First().AsTensor<float>();
+            var prediction = new Predictiond { PredictedValue = score.First() };
+            result.Dispose();
+            ViewBag.Prediction = prediction.PredictedValue;
+            ViewBag.Prediction = Math.Round(ViewBag.Prediction);
+            return View("Prediction");
+        }
+        public class Predictiond
+        {
+            public float PredictedValue { get; set; }
+        }
+
+
 
         public IActionResult Index()
         {
@@ -83,6 +113,7 @@ namespace CarCrash.Controllers
         [HttpGet]
         public IActionResult Prediction()
         {
+            ViewBag.Prediction = null;
             return View();
         }
 
@@ -131,6 +162,11 @@ namespace CarCrash.Controllers
             Road Road = repo.Roads.FirstOrDefault(x => x.ROAD_ID == RoadId);
 
             return View(Road);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
         }
     }
 }
