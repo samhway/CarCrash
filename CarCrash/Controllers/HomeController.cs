@@ -12,6 +12,8 @@ namespace CarCrash.Controllers
 {
     public class HomeController : Controller
     {
+        private InferenceSession _session;
+
         private ICarCrashRepository repo { get; set; }
         public HomeController(ICarCrashRepository temp)
         {

@@ -18,7 +18,10 @@
                     <label asp-for="pedestrian_involved" class="d-inline-block">Will there be a pedestrian involved? </label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="pedestrian_involved" />
+                    <select asp-for="pedestrian_involved">
+                        <option value=1>Yes</option>
+                        <option value=0>No</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -26,7 +29,10 @@
                     <label asp-for="bicyclist_involved" class="d-inline-block">Will there be a bicyclist involved? </label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="bicyclist_involved" />
+                    <select asp-for="bicyclist_involved">
+                        <option value=1>Yes</option>
+                        <option value=0>No</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -34,7 +40,10 @@
                     <label asp-for="motorcycle_involved" class="d-inline-block">Will there be a motorcycle involved? </label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="motorcycle_involved" />
+                    <select asp-for="motorcycle_involved">
+                        <option value=1>Yes</option>
+                        <option value=0>No</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -42,7 +51,10 @@
                     <label asp-for="improper_restraint">Are anyone's seatbelts improperly fastened and/or not up to code? </label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="improper_restraint" />
+                    <select asp-for="improper_restraint">
+                        <option value=1>Yes</option>
+                        <option value=0>No</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -50,7 +62,10 @@
                     <label asp-for="unrestrained">Are anyone's seatbelts not fastened?</label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="unrestrained" />
+                    <select asp-for="unrestrained">
+                        <option value=1>Yes</option>
+                        <option value=0>No</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -58,7 +73,10 @@
                     <label asp-for="dui">Has anyone been drinking during this car ride? </label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="dui" />
+                    <select asp-for="dui">
+                        <option value=1>Yes</option>
+                        <option value=0>No</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -66,7 +84,10 @@
                     <label asp-for="overturn_rollover">Has the car been overturned? </label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="overturn_rollover" />
+                    <select asp-for="overturn_rollover">
+                        <option value=1>Yes</option>
+                        <option value=0>No</option>
+                    </select>
                 </div>
             </div><br />
             <div class="row">
@@ -74,9 +95,34 @@
                     <label asp-for="intersection_related">Is the crash in an intersection? </label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="intersection_related" />
+                    <select asp-for="intersection_related">
+                        <option value=1>Yes</option>
+                        <option value=0>No</option>
+                    </select>
                 </div>
-            </div>         
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="drowsy_driving">Will you be driving late at night or without sleep? </label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="drowsy_driving">
+                        <option value=1>Yes</option>
+                        <option value=0>No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="single_vehicle">Is this a multi-car crash? </label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="single_vehicle">
+                        <option value=0>Yes</option>
+                        <option value=1>No</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
