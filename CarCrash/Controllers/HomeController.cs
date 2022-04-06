@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace CarCrash.Controllers
@@ -153,6 +154,11 @@ namespace CarCrash.Controllers
             Road Road = repo.Roads.FirstOrDefault(x => x.ROAD_ID == RoadId);
 
             return View(Road);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
         }
     }
 }
