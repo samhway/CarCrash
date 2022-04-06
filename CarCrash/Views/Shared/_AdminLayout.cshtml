@@ -23,20 +23,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Home" asp-action="Data">Data</a>
+                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Data">Data</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Home" asp-action="Summary">Summary</a>
+                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Create">Crashes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Home" asp-action="Prediction">Safety Predictions</a>
+                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Locations">Locations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Data">Admin</a>
+                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Roads">Roads</a>
                         </li>
+
                     </ul>
                 </div>
             </div>
+            <div class="container float-right"><a class="btn btn-sm btn-secondary float-right text-dark" href="/Account/Logout">Logout</a></div>
+            <div class="container float-right"><a class="btn btn-primary float-right" href="/Admin/Create">Add an Incident</a></div>
         </nav>
     </header>
     <div class="container">
