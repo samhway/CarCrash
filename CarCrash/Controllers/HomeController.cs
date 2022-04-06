@@ -2,14 +2,10 @@
 using CarCrash.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.ML.OnnxRuntime;
-using Microsoft.ML.OnnxRuntime.Tensors;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace CarCrash.Controllers
@@ -19,31 +15,10 @@ namespace CarCrash.Controllers
         private InferenceSession _session;
 
         private ICarCrashRepository repo { get; set; }
-        public HomeController(ICarCrashRepository temp, InferenceSession session)
+        public HomeController(ICarCrashRepository temp)
         {
             repo = temp;
-            _session = session;
         }
-        [HttpPost]
-        public ActionResult Prediction(Crashd data)
-        {
-            var result = _session.Run(new List<NamedOnnxValue>
-            {
-                NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())
-            });
-            Tensor<float> score = result.First().AsTensor<float>();
-            var prediction = new Predictiond { PredictedValue = score.First() };
-            result.Dispose();
-            ViewBag.Prediction = prediction.PredictedValue;
-            ViewBag.Prediction = Math.Round(ViewBag.Prediction);
-            return View("Prediction");
-        }
-        public class Predictiond
-        {
-            public float PredictedValue { get; set; }
-        }
-
-
 
         public IActionResult Index()
         {
@@ -105,62 +80,11 @@ namespace CarCrash.Controllers
             ViewBag.roads = roads;
             return View(x);
         }
-
-        [HttpGet]
         public IActionResult Prediction()
         {
-            ViewBag.Prediction = null;
             return View();
         }
-
-        //[HttpPost]
-        //public IActionResult Prediction()
-        //{
-        //    return View();
-        //}
         public IActionResult Summary()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Create()
-        {
-            ViewBag.loc = repo.Locations.ToList();
-            ViewBag.road = repo.Roads.ToList();
-
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(Crash c)
-        {
-            if (ModelState.IsValid)
-            {
-                return RedirectToAction("Data");
-            }
-            else
-            {
-                return View();
-            }
-
-        }
-
-        public IActionResult Locations(int LocationId = 0)
-        {
-            Location Location = repo.Locations.FirstOrDefault(x => x.LOCATION_ID == LocationId);
-
-            return View(Location);
-        }
-
-        public IActionResult Roads(int RoadId = 0)
-        {
-            Road Road = repo.Roads.FirstOrDefault(x => x.ROAD_ID == RoadId);
-
-            return View(Road);
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }

@@ -10,5 +10,7 @@ namespace CarCrash.Models
         IQueryable<Crash> Crashes { get; }
         IQueryable<Location> Locations { get; }
         IQueryable<Road> Roads { get; }
+
+        public void Create(Crash c);
     }
 }
