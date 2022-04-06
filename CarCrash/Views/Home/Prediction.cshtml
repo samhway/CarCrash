@@ -4,6 +4,16 @@
 
 <h1>put model stuff here. 455 things</h1>
 
+@*Google maps stuff*@
+<div id="map"></div>
+
+<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNBhiuALlQJrrkC4iLxb1M4tZntUIqOYA&callback=initMap&v=weekly"
+        async></script>
+
+<label>Check if starting location is correct. Then choose ending location.</label>
+<input id="check" type="checkbox" />
+
 <h4>Starting location</h4>
 <label>Longitude</label>
 <input id="lon" type="text" />
@@ -19,10 +29,14 @@
 
 <button onclick="api()" href="#">Predict</button>
 
-<script>
-    function api(){
-        console.log("hello")
+<p id="output"></p>
 
+<script>
+    function numPrint(result) {
+        document.getElementById('output').innerHTML = "You will pass through these zones: " + result;
+    }
+
+    function api() {
         var lon = document.getElementById('lon').value;
         var lat = document.getElementById('lat').value;
         var lon2 = document.getElementById('lon2').value;
@@ -40,8 +54,49 @@
 
         fetch(url, requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => numPrint(result))
             .catch(error => console.log('error', error));
 
+        document.getElementById('output').innerHTML = "Please wait for result..."
+    }
+
+    function initMap() {
+        const myLatlng = { lat: 40.251438, lng: -111.648887 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 10,
+            center: myLatlng,
+        });
+        // Create the initial InfoWindow.
+        let infoWindow = new google.maps.InfoWindow({
+            content: "Click the map to get Lat/Lng!",
+            position: myLatlng,
+        });
+
+        infoWindow.open(map);
+        // Configure the click listener.
+        map.addListener("click", (mapsMouseEvent) => {
+            // Close the current InfoWindow.
+            infoWindow.close();
+            // Create a new InfoWindow.
+            infoWindow = new google.maps.InfoWindow({
+                position: mapsMouseEvent.latLng,
+            });
+            infoWindow.setContent(
+                JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+            );
+            infoWindow.open(map);
+
+            console.log(mapsMouseEvent.latLng.toJSON()['lat']);
+
+            if (document.getElementById('check').checked == false) {
+                document.getElementById('lon').value = mapsMouseEvent.latLng.toJSON()['lng'];
+                document.getElementById('lat').value = mapsMouseEvent.latLng.toJSON()['lat'];
+            }
+            else {
+                document.getElementById('lon2').value = mapsMouseEvent.latLng.toJSON()['lng'];
+                document.getElementById('lat2').value = mapsMouseEvent.latLng.toJSON()['lat'];
+            }
+            
+        });
     }
 </script>
