@@ -10,11 +10,11 @@ namespace CarCrash.Models
 {
     public class UserDbContext : IdentityDbContext<IdentityUser>
     {
-        public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
+        public UserDbContext(DbContextOptions options) : base(options)
         {
 
         }
 
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
     }
 }

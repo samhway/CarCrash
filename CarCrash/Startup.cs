@@ -126,7 +126,7 @@ namespace CarCrash
 
                 endpoints.MapRazorPages();
             });
-
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }

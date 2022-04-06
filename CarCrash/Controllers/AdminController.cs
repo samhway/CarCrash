@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarCrash.Controllers
 {
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "RequireAdminRole")]
     public class AdminController : Controller
     {
         public IActionResult Admin()
