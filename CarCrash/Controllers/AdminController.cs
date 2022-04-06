@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CarCrash.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private ICarCrashRepository repo { get; set; }
@@ -102,7 +102,7 @@ namespace CarCrash.Controllers
             }
 
         }
-        [Authorize(Roles = "Admin")]
+        
         public IActionResult Locations(int LocationId = 0)
         {
             Location Location = repo.Locations.FirstOrDefault(x => x.LOCATION_ID == LocationId);
