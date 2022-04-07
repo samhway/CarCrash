@@ -34,6 +34,18 @@
                         <li class="nav-item">
                             <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Data">Admin</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: #BFCC94" href="/Account/Logout">Logout</a>
+                            </li>
+                        }
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: #BFCC94" href="/Login">Login</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

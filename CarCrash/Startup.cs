@@ -39,13 +39,13 @@ namespace CarCrash
                 options.MaxAge = TimeSpan.FromDays(400);
             });
 
-            services.AddDbContext<CrashDbContext>(options =>
-            {
-                options.UseMySql(Environment.GetEnvironmentVariable("CrashDbString"));
-            });
+            //services.AddDbContext<CrashDbContext>(options =>
+            //{
+            //    options.UseMySql(Environment.GetEnvironmentVariable("CrashDbString"));
+            //});
 
-            services.AddDbContext<AppIdentityDbContext>(options =>
-                options.UseMySql(Environment.GetEnvironmentVariable("IdentityDbString")));
+            //services.AddDbContext<AppIdentityDbContext>(options =>
+            //    options.UseMySql(Environment.GetEnvironmentVariable("IdentityDbString")));
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()

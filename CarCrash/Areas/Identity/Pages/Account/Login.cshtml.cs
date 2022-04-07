@@ -91,7 +91,7 @@ namespace CarCrash.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");
-                        return Redirect(returnUrl);
+                        return Redirect("/");
                     }
                     else
                     {
