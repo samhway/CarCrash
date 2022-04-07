@@ -6,9 +6,9 @@
 
 <h3 class="my-3">Add new location</h3>
 
-<form method="post">
-    <div class="form-group">
-        <input type="hidden" asp-for="@Model.LOCATION_ID" />
+<form method="post" asp-controller="Admin" asp-action="Locations">
+    <div class="form-group" asp-validation-summary="All">
+        <input type="hidden" asp-for="@Model.LOCATION_ID" value="@(ViewBag.max + 1)"/>
         <label asp-for="@Model.CITY">City:</label><br />
         <input asp-for="@Model.CITY" /><br />
         <label asp-for="@Model.COUNTY_NAME">County:</label><br />

@@ -17,12 +17,37 @@ namespace CarCrash.Models
         public IQueryable<Location> Locations => context.locations;
         public IQueryable<Road> Roads => context.roads;
 
-        public void Create(Crash c)
+        public void Save(Crash c)
         {
+            if (c.CRASH_ID == 0)
+            {
+                context.crashes.Add(c);
+            }
             
-            context.crashes.Add(c);
-            
+            context.SaveChanges();
+        }
 
+        public void SaveLocation(Location l)
+        {
+            context.locations.Add(l);
+            context.SaveChanges();
+        }
+
+        public void SaveRoad(Road r)
+        {
+            context.roads.Add(r);
+            context.SaveChanges();
+        }
+
+        public void Update(Crash c)
+        {
+            context.Update(c);
+            context.SaveChanges();
+        }
+
+        public void DeleteIt(Crash c)
+        {
+            context.Remove(c);
             context.SaveChanges();
         }
     }

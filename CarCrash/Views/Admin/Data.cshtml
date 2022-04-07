@@ -71,8 +71,8 @@
                 <td>@c.DISTRACTED_DRIVING</td>
                 <td>@c.DROWSY_DRIVING</td>
                 <td>@c.ROADWAY_DEPARTURE</td>
-                <td><a>Edit</a></td>
-                <td><a>Delete</a></td>
+                <td><a asp-controller="Admin" asp-action="Edit" asp-route-crashid="@c.CRASH_ID">Edit</a></td>
+                <td><a asp-controller="Admin" asp-action="Delete" asp-route-crashid="@c.CRASH_ID">Delete</a></td>
             </tr>
             }
         </tbody>

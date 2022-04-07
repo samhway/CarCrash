@@ -93,7 +93,7 @@ namespace CarCrash.Controllers
         {
             if (ModelState.IsValid)
             {
-                repo.Create(c);
+                repo.Save(c);
                 return RedirectToPage("/Admin/Data");
             }
             else
@@ -102,19 +102,87 @@ namespace CarCrash.Controllers
             }
 
         }
-        
-        public IActionResult Locations(int LocationId = 0)
-        {
-            Location Location = repo.Locations.FirstOrDefault(x => x.LOCATION_ID == LocationId);
 
-            return View(Location);
+        [HttpGet]
+        public IActionResult Edit(int crashId)
+        {
+            ViewBag.crash = repo.Crashes.ToList();
+            ViewBag.loc = repo.Locations.ToList();
+            ViewBag.road = repo.Roads.ToList();
+            var crash = repo.Crashes.Single(x => x.CRASH_ID == crashId);
+
+            return View("Edit", crash);
         }
 
-        public IActionResult Roads(int RoadId = 0)
+        [HttpPost]
+        public IActionResult Edit(Crash c)
         {
-            Road Road = repo.Roads.FirstOrDefault(x => x.ROAD_ID == RoadId);
+            repo.Update(c);
 
-            return View(Road);
+            return RedirectToAction("Data");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int crashid)
+        {
+            ViewBag.crash = repo.Crashes.ToList();
+            var crash = repo.Crashes.Single(x => x.CRASH_ID == crashid);
+            return View("Delete", crash);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Crash c)
+        {
+            repo.DeleteIt(c);
+            return RedirectToAction("Data");
+        }
+        
+        [HttpGet]
+        public IActionResult Locations()
+        {
+            ViewBag.max = repo.Locations.Select(x => x.LOCATION_ID).Max();
+            ViewBag.loc = repo.Locations.ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Locations(Location l)
+        {
+            if (ModelState.IsValid)
+            {
+                repo.SaveLocation(l);
+                return RedirectToAction("Data");
+            }
+            else
+            {
+                ViewBag.loc = repo.Locations.ToList();
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Roads()
+        {
+            ViewBag.max = repo.Roads.Select(x => x.ROAD_ID).Max();
+            ViewBag.road = repo.Roads.ToList();
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Roads(Road r)
+        {
+            if (ModelState.IsValid)
+            {
+                repo.SaveRoad(r);
+                return RedirectToAction("Data");
+            }
+            else
+            {
+                ViewBag.road = repo.Locations.ToList();
+                return View();
+            }
         }
     }
 }
