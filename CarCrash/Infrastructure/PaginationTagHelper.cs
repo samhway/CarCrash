@@ -38,10 +38,24 @@ namespace CarCrash.Infrastructure
 
             TagBuilder final = new TagBuilder("div");
 
-            if(PageBlah.TotalPages < 9)
+            if(PageBlah.TotalPages == 25009)
             {
-                var firstLink = 1;
-                var lastLink = PageBlah.TotalPages + 1;
+                var addLinks = 5;
+                var subLinks = 4;
+                if (PageBlah.CurrentPage < 5)
+                {
+                    subLinks = (PageBlah.CurrentPage - 1);
+                    addLinks = (9 - subLinks);
+                }
+                else if (PageBlah.CurrentPage > 25005)
+                {
+                    addLinks = (25010 - PageBlah.CurrentPage);
+                    subLinks = (9 - addLinks);
+
+                }
+                var firstLink = (PageBlah.CurrentPage - subLinks);
+                var lastLink = (PageBlah.CurrentPage + addLinks);
+                
 
                 for (int i = firstLink; i < lastLink; i++)
                 {
@@ -58,33 +72,48 @@ namespace CarCrash.Infrastructure
                     final.InnerHtml.AppendHtml(tb);
 
                 }
+                if (lastLink < (PageBlah.TotalPages + 1))
+                {
+                    if ((PageBlah.TotalPages - lastLink) >= 1)
+                    {
+                        TagBuilder td = new TagBuilder("a");
+                        td.Attributes.Add("readonly", "readonly");
+                        td.Attributes.Add("title", "You can filter above, or click a numbered link");
+                        td.InnerHtml.AppendHtml("...");
+                        td.AddCssClass(PageClass);
+                        td.AddCssClass(PageClassNormal);
+                        final.InnerHtml.AppendHtml(td);
+                    }
 
-                //final.InnerHtml.AppendHtml();
+                    for (int i = (PageBlah.TotalPages); i < (PageBlah.TotalPages + 1); i++)
+                    {
+                        TagBuilder tb = new TagBuilder("a");
+                        tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i }); //This sets up our href, we're going to pagenumber i
+                        if (PageClassesEnabled)
+                        {
+                            tb.AddCssClass(PageClass);
+                            tb.AddCssClass(i == PageBlah.CurrentPage ? PageClassSelected : PageClassNormal); //Shortcut IF STATEMENT
+                        }
 
-                tho.Content.AppendHtml(final.InnerHtml);
+                        tb.InnerHtml.Append(i.ToString());
+
+                        final.InnerHtml.AppendHtml(tb);
+                    }
+                }
             }
             else
             {
                 var addLinks = 5;
                 var subLinks = 4;
-                if(PageBlah.CurrentPage > 4)
-                {
-                    TagBuilder tc = new TagBuilder("a");
-                    tc.Attributes.Add("readonly", "readonly");
-                    tc.InnerHtml.AppendHtml("...");
-                    tc.AddCssClass(PageClass);
-                    tc.AddCssClass(PageClassNormal);
-                    final.InnerHtml.AppendHtml(tc);
-                }
-                if(PageBlah.CurrentPage < 5)
+                if (PageBlah.CurrentPage < 5)
                 {
                     subLinks = (PageBlah.CurrentPage - 1);
                     addLinks = (9 - subLinks);
                 }
-                else if(PageBlah.CurrentPage > 25005)
+                else if (PageBlah.CurrentPage > 25005)
                 {
                     addLinks = (25010 - PageBlah.CurrentPage);
-                    subLinks = (9-addLinks);
+                    subLinks = (9 - addLinks);
 
                 }
                 var firstLink = (PageBlah.CurrentPage - subLinks);
@@ -93,7 +122,7 @@ namespace CarCrash.Infrastructure
                 for (int i = firstLink; i < lastLink; i++)
                 {
                     TagBuilder tb = new TagBuilder("a");
-                    tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i }); //This sets up our href, we're going to pagenumber i
+                    tb.Attributes["href"] = uh.Action("FilterData", new { pageNum = i }); //This sets up our href, we're going to pagenumber i
                     if (PageClassesEnabled)
                     {
                         tb.AddCssClass(PageClass);
@@ -105,20 +134,43 @@ namespace CarCrash.Infrastructure
                     final.InnerHtml.AppendHtml(tb);
 
                 }
-                if (PageBlah.CurrentPage < 25005)
+                if (lastLink < (PageBlah.TotalPages + 1 ))
                 {
-                    TagBuilder td = new TagBuilder("a");
-                    td.Attributes.Add("readonly", "readonly");
-                    td.InnerHtml.AppendHtml("...");
-                    td.AddCssClass(PageClass);
-                    td.AddCssClass(PageClassNormal);
-                    final.InnerHtml.AppendHtml(td);
+                    if((PageBlah.TotalPages - lastLink) >= 1)
+                    {
+                        TagBuilder td = new TagBuilder("a");
+                        td.Attributes.Add("readonly", "readonly");
+                        td.Attributes.Add("title", "You can filter above, or click a numbered link");
+                        td.InnerHtml.AppendHtml("...");
+                        td.AddCssClass(PageClass);
+                        td.AddCssClass(PageClassNormal);
+                        final.InnerHtml.AppendHtml(td);
+                    }
+
+
+                    for (int i = (PageBlah.TotalPages); i < (PageBlah.TotalPages + 1); i++)
+                    {
+                        TagBuilder tb = new TagBuilder("a");
+                        tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i }); //This sets up our href, we're going to pagenumber i
+                        if (PageClassesEnabled)
+                        {
+                            tb.AddCssClass(PageClass);
+                            tb.AddCssClass(i == PageBlah.CurrentPage ? PageClassSelected : PageClassNormal); //Shortcut IF STATEMENT
+                        }
+
+                        tb.InnerHtml.Append(i.ToString());
+
+                        final.InnerHtml.AppendHtml(tb);
+
+                    }
                 }
 
-                //final.InnerHtml.AppendHtml();
-
-                tho.Content.AppendHtml(final.InnerHtml);
             }
+
+
+
+            tho.Content.AppendHtml(final.InnerHtml);
+            
 
 
 

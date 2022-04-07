@@ -10,18 +10,18 @@
 
 <div class="rounded shadow">
     <form method="post" asp-action="FilterData">
-        <table class="table table-bordered table-responsive table-sm">
+        <table  class="table table-bordered table-responsive table-sm">
             <thead class="bg-primary text-white">
 
                 <tr>
-                    <th>Crash ID<center><input name="ID" type="number"/></center></th>
-                    <th>Crash Datetime<center><input name="Date" type="datetime" /></center></th>
-                    <th>Route</th>
-                    <th>Mile Point</th>
-                    <th>Lattitude</th>
-                    <th>Longitude</th>
-                    <th>Road Name</th>
-                    <th>Location<center><input name="Loc" type="text" /></center></th>
+                    <th>Crash ID<center><input name="ID" type="number" /></center></th>
+                    <th>Crash Datetime<center><input placeholder="Enter a day/time, month, or year!" name="Date" type="datetime" /></center></th>
+                    <th>Route <center><input name="Route" type="number" /></center></th>
+                    <th>Mile Point <center><input name="MP" type="number" /></center></th>
+                    <th>Lattitude<center><input name="Lat" type="number" /></center></th>
+                    <th>Longitude<center><input name="Lon" type="number" /></center></th>
+                    <th>Road Name<center><input type="text" name="Rnam" /></center></th>
+                    <th>Location<center><input placeholder="City, County" name="Loc" type="text" /></center></th>
                     <th>Crash Severity <center><select name="Sev"><option value=null>All</option><option value=1>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option><option value=5>5</option></select></center></th>
                     <th>Work Zone Related? <center><select name="WSRel"><option value=true>True</option><option value=false>False</option><option value=null selected>All</option></select></center></th>
                     <th>Pedestrian Involved? <center><select name="PedInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
@@ -44,8 +44,9 @@
                     <th>Roadway Departure? <center><select name="Depart"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
                 </tr>
                 <tr>
-                    <th colspan="14"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
-                    <th colspan="14"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
+                    <th colspan="6"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
+                    <th colspan="9"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
+                    <th colspan="13"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
 
                 </tr>
             </thead>

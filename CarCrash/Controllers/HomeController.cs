@@ -50,7 +50,7 @@ namespace CarCrash.Controllers
             return View();
         }
 
-        public IActionResult FilterData(bool ?CycInv, bool ?PedInv, bool ?WSRel, bool ?MotInv, bool ?ImpRes, bool ?Unr, bool ?DUI, bool ?IntRel, bool ?AniRel, bool ?DomAniRel, bool ?OveRol, bool ?ComVeh, bool ?TenDri, bool ?OldDri, bool ?Night, bool ?Single, bool ?Dist, bool ?Drows, bool ?Depart,int ?ID, int ?Sev, string ?Date, string ?Loc, int pageNum = 1)
+        public IActionResult FilterData(bool ?CycInv, bool ?PedInv, bool ?WSRel, bool ?MotInv, decimal ?lat, decimal ?lon, string ?Rnam, bool ?ImpRes, bool ?Unr,decimal ?MP ,bool ?DUI, bool ?IntRel, bool ?AniRel,string ?Route, bool ?DomAniRel, bool ?OveRol, bool ?ComVeh, bool ?TenDri, bool ?OldDri, bool ?Night, bool ?Single, bool ?Dist, bool ?Drows, bool ?Depart,int ?ID, int ?Sev, string ?Date, string ?Loc, int pageNum = 1)
         {
             int pageSize = 10;
 
@@ -144,11 +144,57 @@ namespace CarCrash.Controllers
             {
                 Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.CRASH_DATETIME.Contains(Date));
             }
-            //if (Loc != null)
-            //{
-            //    Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.CRASH_DATETIME.Contains(Loc));
-            //}
+            if (Route != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.ROUTE == Route);
+            }
+            if (MP != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.MILEPOINT == MP);
+            }
+            if (lat != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.LAT_UTM_Y == lat);
+            }
+            if (lon != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.LONG_UTM_X == lon);
+            }
 
+
+            List<Location> Locations = repo.Locations.ToList();
+            List<Road> Roads = repo.Roads.ToList();
+            Dictionary<int, string> locations = new Dictionary<int, string>();
+            Dictionary<int, string> roads = new Dictionary<int, string>();
+
+            List<int> SearchLocations = new List<int>();
+            if(Loc != null)
+            {
+                foreach (Location l in Locations)
+                {
+                    if (l.CITY == Loc.ToUpper() | l.COUNTY_NAME == Loc.ToUpper())
+                    {
+                        SearchLocations.Add(l.LOCATION_ID);
+                    }
+
+                }
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => SearchLocations.Contains(p.LOCATION_ID));
+            }
+            List<int> RoadNames = new List<int>();
+            if(Rnam != null)
+            {
+                foreach(Road r in Roads)
+                {
+                    if(r.MAIN_ROAD_NAME == Rnam.ToUpper())
+                    {
+                        RoadNames.Add(r.ROAD_ID);
+                    }
+                }
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => RoadNames.Contains(p.ROAD_ID)    );
+            }
+            var Crashed = Crashes;
+
+            Crashes = (IOrderedQueryable<Crash>)Crashes.Skip((pageNum - 1) * pageSize).Take(pageSize);
 
             var x = new CrashesViewModel
             {
@@ -157,20 +203,12 @@ namespace CarCrash.Controllers
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumCrashes = repo.Crashes.Count(),
+                    TotalNumCrashes = Crashed.Count(),
                     CrashesPerPage = pageSize,
                     CurrentPage = pageNum
                 }
             };
-            //var filtered = repo.Crashes.Where(p => p.BICYCLIST_INVOLVED == CycInv & p.PEDESTRIAN_INVOLVED == PedInv & p.WORK_ZONE_RELATED == WSRel).ToList();
 
-            List<Location> Locations = repo.Locations.ToList();
-            List<Road> Roads = repo.Roads.ToList();
-            Dictionary<int, string> locations = new Dictionary<int, string>();
-            Dictionary<int, string> roads = new Dictionary<int, string>();
-            Crashes = (IOrderedQueryable<Crash>)Crashes.Skip((pageNum - 1) * pageSize).Take(pageSize);
-
-            var count = Crashes.Count();
             foreach (Crash c in Crashes)
             {
                 foreach (Location l in Locations)
