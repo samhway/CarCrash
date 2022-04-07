@@ -15,7 +15,7 @@
 
                 <tr>
                     <th>Crash ID<center><input name="ID" type="number" /></center></th>
-                    <th>Crash Datetime<center><input placeholder="Enter a day/time, month, or year!" name="Date" type="datetime" /></center></th>
+                    <th>Crash Datetime<center><input placeholder="Time, day, month, or year!" title="Enter a day, month, or year!" name="Date" type="datetime" /></center></th>
                     <th>Route <center><input name="Route" type="number" /></center></th>
                     <th>Mile Point <center><input name="MP" type="number" /></center></th>
                     <th>Lattitude<center><input name="Lat" type="number" /></center></th>
@@ -42,11 +42,13 @@
                     <th>Distracted Driving? <center><select name="Dist"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
                     <th>Drowsy Driving? <center><select name="Drows"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
                     <th>Roadway Departure? <center><select name="Depart"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
                 <tr>
                     <th colspan="6"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
-                    <th colspan="9"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
-                    <th colspan="13"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
+                    <th colspan="10"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
+                    <th colspan="14"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
 
                 </tr>
             </thead>
@@ -54,36 +56,38 @@
             <tbody>
                 @foreach (Crash c in Model.Crashes)
                 {
-                    <tr>
-                        <td>@c.CRASH_ID</td>
-                        <td>@c.CRASH_DATETIME</td>
-                        <td>@c.ROUTE</td>
-                        <td>@c.MILEPOINT</td>
-                        <td>@c.LAT_UTM_Y</td>
-                        <td>@c.LONG_UTM_X</td>
-                        <td>@ViewBag.roads[c.ROAD_ID]</td>
-                        <td>@ViewBag.locations[c.LOCATION_ID]</td>
-                        <td>@c.CRASH_SEVERITY_ID</td>
-                        <td>@c.WORK_ZONE_RELATED</td>
-                        <td>@c.PEDESTRIAN_INVOLVED</td>
-                        <td>@c.BICYCLIST_INVOLVED</td>
-                        <td>@c.MOTORCYCLE_INVOLVED</td>
-                        <td>@c.IMPROPER_RESTRAINT</td>
-                        <td>@c.UNRESTRAINED</td>
-                        <td>@c.DUI</td>
-                        <td>@c.INTERSECTION_RELATED</td>
-                        <td>@c.WILD_ANIMAL_RELATED</td>
-                        <td>@c.DOMESTIC_ANIMAL_RELATED</td>
-                        <td>@c.OVERTURN_ROLLOVER</td>
-                        <td>@c.COMMERCIAL_MOTOR_VEH_INVOLVED</td>
-                        <td>@c.TEENAGE_DRIVER_INVOLVED</td>
-                        <td>@c.OLDER_DRIVER_INVOLVED</td>
-                        <td>@c.NIGHT_DARK_CONDITION</td>
-                        <td>@c.SINGLE_VEHICLE</td>
-                        <td>@c.DISTRACTED_DRIVING</td>
-                        <td>@c.DROWSY_DRIVING</td>
-                        <td>@c.ROADWAY_DEPARTURE</td>
-                    </tr>
+                <tr>
+                    <td>@c.CRASH_ID</td>
+                    <td>@c.CRASH_DATETIME</td>
+                    <td>@c.ROUTE</td>
+                    <td>@c.MILEPOINT</td>
+                    <td>@c.LAT_UTM_Y</td>
+                    <td>@c.LONG_UTM_X</td>
+                    <td>@ViewBag.roads[c.ROAD_ID]</td>
+                    <td>@ViewBag.locations[c.LOCATION_ID]</td>
+                    <td>@c.CRASH_SEVERITY_ID</td>
+                    <td>@c.WORK_ZONE_RELATED</td>
+                    <td>@c.PEDESTRIAN_INVOLVED</td>
+                    <td>@c.BICYCLIST_INVOLVED</td>
+                    <td>@c.MOTORCYCLE_INVOLVED</td>
+                    <td>@c.IMPROPER_RESTRAINT</td>
+                    <td>@c.UNRESTRAINED</td>
+                    <td>@c.DUI</td>
+                    <td>@c.INTERSECTION_RELATED</td>
+                    <td>@c.WILD_ANIMAL_RELATED</td>
+                    <td>@c.DOMESTIC_ANIMAL_RELATED</td>
+                    <td>@c.OVERTURN_ROLLOVER</td>
+                    <td>@c.COMMERCIAL_MOTOR_VEH_INVOLVED</td>
+                    <td>@c.TEENAGE_DRIVER_INVOLVED</td>
+                    <td>@c.OLDER_DRIVER_INVOLVED</td>
+                    <td>@c.NIGHT_DARK_CONDITION</td>
+                    <td>@c.SINGLE_VEHICLE</td>
+                    <td>@c.DISTRACTED_DRIVING</td>
+                    <td>@c.DROWSY_DRIVING</td>
+                    <td>@c.ROADWAY_DEPARTURE</td>
+                    <td><a asp-controller="Admin" asp-action="Edit" asp-route-crashid="@c.CRASH_ID" class="btn btn-sm btn-warning">Edit</a></td>
+                    <td><a asp-controller="Admin" asp-action="Delete" asp-route-crashid="@c.CRASH_ID" class="btn btn-sm btn-danger">Delete</a></td>
+                </tr>
                 }
             </tbody>
         </table>
