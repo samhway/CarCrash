@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace CarCrash
 {
@@ -47,6 +48,15 @@ namespace CarCrash
             {
                 options.AddPolicy("RequireAdminRole",
                      policy => policy.RequireRole("Admin"));
+            });
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                // requires using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddScoped<ICarCrashRepository, EFCarCrashRepository>();
@@ -109,6 +119,7 @@ namespace CarCrash
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
