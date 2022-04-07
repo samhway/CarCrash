@@ -41,7 +41,8 @@ namespace CarCrash
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDbContext>();
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddAuthorization(options =>
             {
@@ -115,6 +116,10 @@ namespace CarCrash
             app.UseAuthorization();
 
             app.UseStatusCodePagesWithRedirects("~/error");
+
+            //app.RegisterType<CrashTwoFactorAuthentication<IdentityUser>>()
+            //        .As<IUserTwoFactorTokenProvider<IdentityUser>>()
+            //        .AddScoped();
 
             app.UseEndpoints(endpoints =>
             {
