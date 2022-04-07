@@ -20,9 +20,9 @@ namespace CarCrash.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login()
         {
-            return View(new LoginModel { ReturnUrl = returnUrl });
+            return Redirect("/login");
         }
         [HttpPost]
         public async Task<IActionResult> Login (LoginModel loginModel)
@@ -35,15 +35,21 @@ namespace CarCrash.Controllers
                 {
                     await signInManager.SignOutAsync();
 
+                    if (user.TwoFactorEnabled == true)
+                    {
+                        return Redirect("/loginmfa");
+                    }
+
                     if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
                     {
-                        return Redirect("/Admin/Data");
+                        return Redirect("/Admin/data");
                     }
                 }
             }
             ModelState.AddModelError("", "Invalid name or password");
             return View(loginModel);
         }
+
         public async Task<RedirectResult> Logout (string returnUrl = "/")
         {
             await signInManager.SignOutAsync();

@@ -42,7 +42,8 @@ namespace CarCrash
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDbContext>();
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddAuthorization(options =>
             {

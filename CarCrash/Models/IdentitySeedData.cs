@@ -39,7 +39,7 @@ namespace CarCrash.Models
                 user = new IdentityUser(adminUser);
                 user2 = new IdentityUser(userBasic);
 
-                user.Email = "admin@yeet.com";
+                user.Email = "goten3917@gmail.com";
                 user.PhoneNumber = "555-1234";
 
                 user2.Email = "yeeter@yeeter.com";

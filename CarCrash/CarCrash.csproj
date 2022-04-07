@@ -2,26 +2,33 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>52591c7f-b3fe-4457-9ea5-bed394243e43</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+
     <None Include="wwwroot\crash.onnx" />
   </ItemGroup>
 
   <ItemGroup>
+
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.23" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.23">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.23">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     
     <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.11.0" />
+    
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.7" />
   </ItemGroup>
 
