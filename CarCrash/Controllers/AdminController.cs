@@ -20,7 +20,7 @@ namespace CarCrash.Controllers
 
         public IActionResult Index()
         {
-            return Redirect("account/login");
+            return Redirect("/login");
         }
 
         public IActionResult Data(int crashSeverity, int pageNum = 1)
