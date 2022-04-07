@@ -1,0 +1,147 @@
+﻿@{
+        ViewData["Title"] = "All Data";
+}
+@model CrashesViewModel
+
+<h1 class="my-4">All Crash Data</h1>
+@*<div class="btn-group pull-right m-1" page-blah="@Model.PageInfo" page-action="Filter" page-class="btn"
+    page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+    page-classes-enabled="true">blob</div>*@
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    @section Scripts{
+        <!-- Bootstrap core JavaScript-->
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="~/js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/lib/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="~/js/demo/datatables-demo.js"></script>
+    }
+
+    <title>SB Admin 2 - Tables</title>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                <p class="mb-4">
+                    DataTables is a third party plugin that is used to generate the demo table below.
+                    For more information about DataTables, please visit the <a target="_blank"
+                                                                               href="https://datatables.net">official DataTables documentation</a>.
+                </p>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead class="bg-primary text-white">
+
+                                    <tr>
+                                        <th>Crash ID</th>
+                                        <th>Crash Datetime</th>
+                                        <th>Route</th>
+                                        <th>Mile Point</th>
+                                        <th>Lattitude</th>
+                                        <th>Longitude</th>
+                                        <th>Road Name</th>
+                                        <th>Location</th>
+                                        <th>Crash Severity</th>
+                                        <th>Work Zone Related? <center><select name="WSRel"><option value=true>True</option><option value=false>False</option><option value="" selected>All</option></select></center></th>
+                                        <th>Pedestrian Involved? <center><select name="PedInv"><option value="True">True</option><option value="False">False</option><option value="" selected>All</option></select></center></th>
+                                        <th>Cyclist Involved? <center><select name="CycInv"><option value="True">True</option><option value="False">False</option><option value="" selected>All</option></select></center></th>
+                                        <th>Motorcycle Involved? <center><select name="MotInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Improper Restraint?<center><select name="ImpRes"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center> </th>
+                                        <th>Unrestrained?<center><select name="Unr"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center> </th>
+                                        <th>DUI?<center><select name="DUI"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Intersection Related? <center><select name="IntRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Wild Animal Related? <center><select name="AniRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Domestic Animal Related? <center><select name="DomAniRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Overturned Rollover? <center><select name="OveRol"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Commercial Vehicle Involved? <center><select name="ComVeh"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Teenage Driver Involved? <center><select name="TenDri"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Older Driver Involved? <center><select name="OldDri"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Night Condition? <center><select name="Night"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Single Vehicle? <center><select name="Single"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Distracted Driving? <center><select name="Dist"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Drowsy Driving? <center><select name="Drows"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                        <th>Roadway Departure? <center><select name="Depart"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Crash c in Model.Crashes)
+                                    {
+                                        <tr>
+                                            <td>@c.CRASH_ID</td>
+                                            <td>@c.CRASH_DATETIME</td>
+                                            <td>@c.ROUTE</td>
+                                            <td>@c.MILEPOINT</td>
+                                            <td>@c.LAT_UTM_Y</td>
+                                            <td>@c.LONG_UTM_X</td>
+                                            <td>@ViewBag.roads[c.ROAD_ID]</td>
+                                            <td>@ViewBag.locations[c.LOCATION_ID]</td>
+                                            <td>@c.CRASH_SEVERITY_ID</td>
+                                            <td>Workzone Related: @c.WORK_ZONE_RELATED</td>
+                                            <td>@c.PEDESTRIAN_INVOLVED</td>
+                                            <td>@c.BICYCLIST_INVOLVED</td>
+                                            <td>@c.MOTORCYCLE_INVOLVED</td>
+                                            <td>@c.IMPROPER_RESTRAINT</td>
+                                            <td>@c.UNRESTRAINED</td>
+                                            <td>@c.DUI</td>
+                                            <td>@c.INTERSECTION_RELATED</td>
+                                            <td>@c.WILD_ANIMAL_RELATED</td>
+                                            <td>@c.DOMESTIC_ANIMAL_RELATED</td>
+                                            <td>@c.OVERTURN_ROLLOVER</td>
+                                            <td>@c.COMMERCIAL_MOTOR_VEH_INVOLVED</td>
+                                            <td>@c.TEENAGE_DRIVER_INVOLVED</td>
+                                            <td>@c.OLDER_DRIVER_INVOLVED</td>
+                                            <td>@c.NIGHT_DARK_CONDITION</td>
+                                            <td>@c.SINGLE_VEHICLE</td>
+                                            <td>@c.DISTRACTED_DRIVING</td>
+                                            <td>@c.DROWSY_DRIVING</td>
+                                            <td>@c.ROADWAY_DEPARTURE</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+    </div>
+    <div class="btn-group pull-right m-1" page-blah="@Model.PageInfo" page-action="Data" page-class="btn"
+         page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+         page-classes-enabled="true">blob</div>
+</body>
