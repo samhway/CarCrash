@@ -32,6 +32,13 @@ namespace CarCrash
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(400);
+            });
+
             services.AddDbContext<CrashDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
