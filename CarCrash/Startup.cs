@@ -127,8 +127,8 @@ namespace CarCrash
                     );
                 endpoints.MapControllerRoute(
                     name: "FilterPaging",
-                    pattern: "FilterData{pageNum}",
-                    defaults: new { Controller = "Home", action = "FilterData", pageNum = 1 }
+                    pattern: "SearchData{pageNum}/{WSRel}/{MotInv}/{PedInv}/{CycInv}",
+                    defaults: new { Controller = "Home", action = "SearchData", WSRel = false, pageNum = 1 }
                     );
                 endpoints.MapDefaultControllerRoute();
 
