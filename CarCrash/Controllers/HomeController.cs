@@ -50,27 +50,110 @@ namespace CarCrash.Controllers
             return View();
         }
 
-        public IActionResult FilterData(bool WSRel, bool PedInv, bool CycInv, bool MotInv, bool ImpRes, bool IntRel, bool DUI, bool Unr, bool AniRel, bool DomAniRel, bool OveRol, int pageNum = 1)
+        public IActionResult FilterData(bool ?CycInv, bool ?PedInv, bool ?WSRel, bool ?MotInv, bool ?ImpRes, bool ?Unr, bool ?DUI, bool ?IntRel, bool ?AniRel, bool ?DomAniRel, bool ?OveRol, bool ?ComVeh, bool ?TenDri, bool ?OldDri, bool ?Night, bool ?Single, bool ?Dist, bool ?Drows, bool ?Depart,int ?ID, int ?Sev, string ?Date, string ?Loc, int pageNum = 1)
         {
             int pageSize = 10;
 
+            var Crashes = repo.Crashes.
+                OrderBy(p => p.CRASH_DATETIME);
+            if(PedInv != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.PEDESTRIAN_INVOLVED == PedInv);
+            }
+            if (CycInv != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.BICYCLIST_INVOLVED == CycInv);
+            }
+            if (WSRel != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.WORK_ZONE_RELATED == WSRel);
+            }
+            if (MotInv != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.MOTORCYCLE_INVOLVED == MotInv);
+            }
+            if (ImpRes != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.IMPROPER_RESTRAINT == ImpRes);
+            }
+            if (Unr != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.UNRESTRAINED == Unr);
+            }
+            if (DUI != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.DUI == DUI);
+            }
+            if (IntRel != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.INTERSECTION_RELATED == IntRel);
+            }
+            if (AniRel != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.WILD_ANIMAL_RELATED == AniRel);
+            }
+            if (DomAniRel != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.DOMESTIC_ANIMAL_RELATED == DomAniRel);
+            }
+            if (OveRol != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.OVERTURN_ROLLOVER == OveRol);
+            }
+            if (ComVeh != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.COMMERCIAL_MOTOR_VEH_INVOLVED == ComVeh);
+            }
+            if (TenDri != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.TEENAGE_DRIVER_INVOLVED == TenDri);
+            }
+            if (OldDri != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.OLDER_DRIVER_INVOLVED == OldDri);
+            }
+            if (Night != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.NIGHT_DARK_CONDITION == Night);
+            }
+            if (Single != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.SINGLE_VEHICLE == Single);
+            }
+            if (Dist != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.DISTRACTED_DRIVING == Dist);
+            }
+            if (Drows != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.DROWSY_DRIVING == Drows);
+            }
+            if (Depart != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.ROADWAY_DEPARTURE == Depart);
+            }
+            if (ID != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.CRASH_ID == ID);
+            }
+            if (Sev != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.CRASH_SEVERITY_ID == Sev);
+            }
+            if (Date != null)
+            {
+                Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.CRASH_DATETIME.Contains(Date));
+            }
+            //if (Loc != null)
+            //{
+            //    Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => p.CRASH_DATETIME.Contains(Loc));
+            //}
+
+
             var x = new CrashesViewModel
             {
-                Crashes = repo.Crashes.
-                OrderBy(p => p.CRASH_DATETIME)
-                .Where(p => p.WORK_ZONE_RELATED == WSRel)
-                .Where(p => p.PEDESTRIAN_INVOLVED == PedInv)
-                .Where(p => p.BICYCLIST_INVOLVED == CycInv)
-                .Where(p => p.MOTORCYCLE_INVOLVED == MotInv)
-                .Where(p => p.IMPROPER_RESTRAINT == ImpRes)
-                .Where(p => p.DUI == DUI)
-                .Where(p => p.UNRESTRAINED == Unr)
-                .Where(p => p.INTERSECTION_RELATED == IntRel)
-                .Where(p => p.OVERTURN_ROLLOVER == OveRol)
-                .Where(p => p.DOMESTIC_ANIMAL_RELATED == DomAniRel)
-                .Where(p => p.WILD_ANIMAL_RELATED == AniRel)
-                .Skip((pageNum - 1) * pageSize)
-                .Take(pageSize),
+                Crashes = Crashes.Skip((pageNum - 1) * pageSize).Take(pageSize),
+
 
                 PageInfo = new PageInfo
                 {
@@ -78,20 +161,16 @@ namespace CarCrash.Controllers
                     CrashesPerPage = pageSize,
                     CurrentPage = pageNum
                 }
-
             };
+            //var filtered = repo.Crashes.Where(p => p.BICYCLIST_INVOLVED == CycInv & p.PEDESTRIAN_INVOLVED == PedInv & p.WORK_ZONE_RELATED == WSRel).ToList();
+
             List<Location> Locations = repo.Locations.ToList();
             List<Road> Roads = repo.Roads.ToList();
             Dictionary<int, string> locations = new Dictionary<int, string>();
             Dictionary<int, string> roads = new Dictionary<int, string>();
+            Crashes = (IOrderedQueryable<Crash>)Crashes.Skip((pageNum - 1) * pageSize).Take(pageSize);
 
-            var Crashes = repo.Crashes.
-            OrderBy(p => p.CRASH_DATETIME)
-            .Where(p => p.WORK_ZONE_RELATED == WSRel)
-            .Where(p => p.PEDESTRIAN_INVOLVED == PedInv)
-            .Skip((pageNum - 1) * pageSize)
-            .Take(pageSize);
-
+            var count = Crashes.Count();
             foreach (Crash c in Crashes)
             {
                 foreach (Location l in Locations)
@@ -116,7 +195,7 @@ namespace CarCrash.Controllers
 
             ViewBag.locations = locations;
             ViewBag.roads = roads;
-            return View("data", x);
+            return View("Data", x);
         }
 
 
@@ -139,16 +218,17 @@ namespace CarCrash.Controllers
                     CurrentPage = pageNum
                 }
             };
-           
+            var Crashes = repo.Crashes.
+            OrderBy(p => p.CRASH_DATETIME)
+            .Skip((pageNum - 1) * pageSize)
+            .Take(pageSize);
+            var count = Crashes.Count();
             List<Location> Locations = repo.Locations.ToList();
             List<Road> Roads = repo.Roads.ToList();
             Dictionary<int, string> locations = new Dictionary<int, string>();
             Dictionary<int, string> roads = new Dictionary<int, string>();
 
-            var Crashes = repo.Crashes.
-            OrderBy(p => p.CRASH_DATETIME)
-            .Skip((pageNum - 1) * pageSize)
-            .Take(pageSize);
+
 
             foreach (Crash c in Crashes)
             {

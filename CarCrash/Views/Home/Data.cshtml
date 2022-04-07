@@ -14,34 +14,34 @@
             <thead class="bg-primary text-white">
 
                 <tr>
-                    <th>Crash ID</th>
-                    <th>Crash Datetime</th>
+                    <th>Crash ID<center><input name="ID" type="number"/></center></th>
+                    <th>Crash Datetime<center><input name="Date" type="datetime" /></center></th>
                     <th>Route</th>
                     <th>Mile Point</th>
                     <th>Lattitude</th>
                     <th>Longitude</th>
                     <th>Road Name</th>
-                    <th>Location</th>
-                    <th>Crash Severity</th>
-                    <th>Work Zone Related? <center><select name="WSRel"><option value=true>True</option><option value=false>False</option><option selected>All</option></select></center></th>
-                    <th>Pedestrian Involved? <center><select name="PedInv"><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Cyclist Involved? <center><select name="CycInv"><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Motorcycle Involved? <center><select name="MotInv"><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Improper Restraint?<center><select name="ImpRes"><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center> </th>
-                    <th>Unrestrained?><center><select name="Unr"><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center> </th>
-                    <th>DUI?<center><select name="DUI"><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Intersection Related? <center><select name="IntRel"><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Wild Animal Related? <center><select name="AniRel"><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Domestic Animal Related? <center><select name="DomAniRel"><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Overturned Rollover? <center><select name="OveRol"><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Commercial Vehicle Involved? <center><select><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Teenage Driver Involved? <center><select><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Older Driver Involved? <center><select><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Night Condition? <center><select><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Single Vehicle? <center><select><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Distracted Driving? <center><select><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Drowsy Driving? <center><select><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
-                    <th>Roadway Departure? <center><select><option value="True">True</option><option value="False">False</option><option value="All" selected>All</option></select></center></th>
+                    <th>Location<center><input name="Loc" type="text" /></center></th>
+                    <th>Crash Severity <center><select name="Sev"><option value=null>All</option><option value=1>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option><option value=5>5</option></select></center></th>
+                    <th>Work Zone Related? <center><select name="WSRel"><option value=true>True</option><option value=false>False</option><option value=null selected>All</option></select></center></th>
+                    <th>Pedestrian Involved? <center><select name="PedInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Cyclist Involved? <center><select name="CycInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Motorcycle Involved? <center><select name="MotInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Improper Restraint?<center><select name="ImpRes"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center> </th>
+                    <th>Unrestrained?<center><select name="Unr"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center> </th>
+                    <th>DUI?<center><select name="DUI"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Intersection Related? <center><select name="IntRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Wild Animal Related? <center><select name="AniRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Domestic Animal Related? <center><select name="DomAniRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Overturned Rollover? <center><select name="OveRol"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Commercial Vehicle Involved? <center><select name="ComVeh"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Teenage Driver Involved? <center><select name="TenDri"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Older Driver Involved? <center><select name="OldDri"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Night Condition? <center><select name="Night"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Single Vehicle? <center><select name="Single"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Distracted Driving? <center><select name="Dist"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Drowsy Driving? <center><select name="Drows"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                    <th>Roadway Departure? <center><select name="Depart"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
                 </tr>
                 <tr>
                     <th colspan="14"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
@@ -49,7 +49,7 @@
 
                 </tr>
             </thead>
-            
+
             <tbody>
                 @foreach (Crash c in Model.Crashes)
                 {
@@ -92,6 +92,8 @@
     </form>
 </div>
 
-<div class="btn-group pull-right m-1" page-blah="@Model.PageInfo" page-action="Data" page-class="btn" 
+<div class="btn-group pull-right m-1" page-blah="@Model.PageInfo" page-action="Data" page-class="btn"
      page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
      page-classes-enabled="true">blob</div>
+
+

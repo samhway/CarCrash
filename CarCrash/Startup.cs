@@ -127,6 +127,11 @@ namespace CarCrash
                                           // like "Page{pageNum}
                     defaults: new { Controller = "Home", action = "Data", pageNum = 1 } //We don't have to include the "defaults: " part
                     );
+                endpoints.MapControllerRoute(
+                    name: "FilterPaging",
+                    pattern: "Filter{pageNum}",
+                    defaults: new { Controller = "Home", action = "FilterData", pageNum = 1 }
+                    );
                 endpoints.MapDefaultControllerRoute();
 
                 endpoints.MapRazorPages();
