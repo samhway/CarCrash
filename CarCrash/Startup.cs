@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace CarCrash
 {
@@ -31,18 +32,26 @@ namespace CarCrash
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddDbContext<CrashDbContext>(options =>
+            services.AddHsts(options =>
             {
-                options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(400);
             });
-            services.AddDbContext<UserDbContext>(options =>
-            {
-                options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
-            });
+
+            //services.AddDbContext<CrashDbContext>(options =>
+            //{
+            //    options.UseMySql(Environment.GetEnvironmentVariable("CrashDbString"));
+            //});
+
+            //services.AddDbContext<AppIdentityDbContext>(options =>
+            //    options.UseMySql(Environment.GetEnvironmentVariable("IdentityDbString")));
+
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<UserDbContext>();
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddAuthorization(options =>
             {
@@ -50,10 +59,20 @@ namespace CarCrash
                      policy => policy.RequireRole("Admin"));
             });
 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                // requires using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddScoped<ICarCrashRepository, EFCarCrashRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {
+
                 // Default Password settings.
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -81,7 +100,7 @@ namespace CarCrash
             //});
 
             services.AddSingleton<InferenceSession>(
-              new InferenceSession("Models/crash.onnx")
+              new InferenceSession("wwwroot/crash.onnx")
             );
 
             //services.AddDbContext<RoadDbContext>(options =>
@@ -109,11 +128,21 @@ namespace CarCrash
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseStatusCodePagesWithRedirects("~/error");
+
+            //This is the CSP header stuff. If anything is broken comment this out to debug.
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy-Report-Only", "default-src 'self'; style-src 'self' 'unsafe-inline'; style-src-elem * 'unsafe-inline'; script-src 'self' maps.googleapis.com 'unsafe-inline'; script-src-elem * 'unsafe-inline'; connect-src https://maps.googleapis.com/ https://mapapidos.herokuapp.com/; frame-src 'self' https://public.tableau.com/; font-src *; img-src 'self' https://*.googleapis.com https://*.gstatic.com *.google.com  *.googleusercontent.com https://public.tableau.com/ data:");
+                await next();
+            });
 
             app.UseEndpoints(endpoints =>
             {

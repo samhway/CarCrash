@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarCrash.Migrations
 {
-    public partial class Identity : Migration
+    public partial class identitysetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

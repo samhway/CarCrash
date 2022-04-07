@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Admin - Locations";
+    Layout = "_AdminLayout";
+}
+@model Location
+
+<h3 class="my-3">Add new location</h3>
+
+<form method="post" asp-controller="Admin" asp-action="Locations">
+    <div class="form-group" asp-validation-summary="All">
+        <input type="hidden" asp-for="LOCATION_ID" value="@(ViewBag.max + 1)"/>
+        <label asp-for="CITY">City:</label><br />
+        <input asp-for="CITY" /><br />
+        <label asp-for="COUNTY_NAME">County:</label><br />
+        <input asp-for="COUNTY_NAME" /><br />
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-success" action="submit">Submit</button>
+    </div>
+</form>

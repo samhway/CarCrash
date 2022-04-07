@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace CarCrash.Controllers
 {
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
         private UserManager<IdentityUser> userManager;
         private SignInManager<IdentityUser> signInManager;
 
-        public LoginController(UserManager<IdentityUser> um, SignInManager<IdentityUser> sim)
+        public AccountController(UserManager<IdentityUser> um, SignInManager<IdentityUser> sim)
         {
             userManager = um;
             signInManager = sim;
@@ -22,42 +22,38 @@ namespace CarCrash.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View(new User { });
+            return Redirect("/login");
         }
-
         [HttpPost]
-        public async Task<IActionResult> Login(User u)
+        public async Task<IActionResult> Login (LoginModel loginModel)
         {
             if (ModelState.IsValid)
             {
-                IdentityUser user = await userManager.FindByNameAsync(u.UserName);
+                IdentityUser user = await userManager.FindByNameAsync(loginModel.Username);
 
                 if (user != null)
                 {
                     await signInManager.SignOutAsync();
 
-                    if ((await signInManager.PasswordSignInAsync(user, u.Password, false, false)).Succeeded)
+                    if (user.TwoFactorEnabled == true)
                     {
-                        if (u.AdminAccess == true)
-                        {
-                            return RedirectToAction("Admin", "Admin");
-                        }
-                        else
-                        {
-                            return RedirectToAction("Index", "Home");
-                        }
+                        return Redirect("/loginmfa");
                     }
 
+                    if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
+                    {
+                        return Redirect("/Admin/data");
+                    }
                 }
-
             }
-            ModelState.AddModelError("", "Invalid username or password");
-            return View(u);
+            ModelState.AddModelError("", "Invalid name or password");
+            return View(loginModel);
         }
 
         public async Task<RedirectResult> Logout (string returnUrl = "/")
         {
             await signInManager.SignOutAsync();
+
             return Redirect(returnUrl);
         }
     }

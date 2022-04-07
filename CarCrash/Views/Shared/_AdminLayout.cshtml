@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-
-
 </head>
 <body>
     <header>
@@ -25,29 +23,21 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Home" asp-action="Data">Data</a>
+                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Data">All Data</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Home" asp-action="Summary">Summary</a>
+                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Create">Create Crash</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Home" asp-action="Prediction">Safety Predictions</a>
+                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Locations">Create Location</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Data">Admin</a>
+                            <a class="nav-link" style="color: #BFCC94" asp-area="" asp-controller="Admin" asp-action="Roads">Create Road</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: #BFCC94" href="/Account/Logout">Logout</a>
-                            </li>
-                        }
-                        @if (!User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: #BFCC94" href="/Login">Login</a>
-                            </li>
-                        }
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: #BFCC94" href="/Account/Logout">Logout</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -62,28 +52,12 @@
 
     <footer class="border-top footer text-muted" >
         <div class="container">
-            &copy; INTEX Winter 2022 - Solomon Berry, Royce Cotcher, Sam Holloway, Braden Terry - <a target="_blank" href="~/INTEX GDPR.pdf">Privacy Policy</a>
+            &copy; INTEX Winter 2022 - Solomon Berry, Royce Cotcher, Sam Holloway, Braden Terry
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <!-- Bootstrap core JavaScript-->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="~/js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="~/lib/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/lib/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="~/js/demo/datatables-demo.js"></script>
-    @*<link href="~/FilterDependencies/css/sb-admin-2.min.css" rel="stylesheet">*@
     @RenderSection("Scripts", required: false)
 </body>
 </html>

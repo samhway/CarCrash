@@ -1,5 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Admin";
+    ViewData["Title"] = "Admin - View Data";
+    Layout = "_AdminLayout";
 }
 
 <h1 class="my-4">All Crash Data</h1>
@@ -70,8 +71,8 @@
                 <td>@c.DISTRACTED_DRIVING</td>
                 <td>@c.DROWSY_DRIVING</td>
                 <td>@c.ROADWAY_DEPARTURE</td>
-                <td><a>Edit</a></td>
-                <td><a>Delete</a></td>
+                <td><a asp-controller="Admin" asp-action="Edit" asp-route-crashid="@c.CRASH_ID" class="btn btn-sm btn-warning">Edit</a></td>
+                <td><a asp-controller="Admin" asp-action="Delete" asp-route-crashid="@c.CRASH_ID" class="btn btn-sm btn-danger">Delete</a></td>
             </tr>
             }
         </tbody>

@@ -46,7 +46,7 @@ namespace CarCrash.Controllers
 
 
         public IActionResult Index()
-        {
+        { 
             return View();
         }
 
@@ -290,11 +290,13 @@ namespace CarCrash.Controllers
                     CurrentPage = pageNum
                 }
             };
+            
             var Crashes = repo.Crashes.
             OrderBy(p => p.CRASH_DATETIME)
             .Skip((pageNum - 1) * pageSize)
             .Take(pageSize);
             var count = Crashes.Count();
+
             List<Location> Locations = repo.Locations.ToList();
             List<Road> Roads = repo.Roads.ToList();
             Dictionary<int, string> locations = new Dictionary<int, string>();
@@ -308,7 +310,7 @@ namespace CarCrash.Controllers
                 {
                     if (l.LOCATION_ID == c.LOCATION_ID)
                     {
-                        locations[l.LOCATION_ID] =  l.CITY + ", " + l.COUNTY_NAME;
+                        locations[l.LOCATION_ID] = l.CITY + ", " + l.COUNTY_NAME;
                     }
                 }
             }
@@ -553,11 +555,6 @@ namespace CarCrash.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult Prediction()
-        //{
-        //    return View();
-        //}
         public IActionResult Summary()
         {
             return View();
@@ -599,7 +596,6 @@ namespace CarCrash.Controllers
 
             return View(Road);
         }
-
         public IActionResult Privacy()
         {
             return View();
