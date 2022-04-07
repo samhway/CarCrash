@@ -47,6 +47,14 @@ namespace CarCrash
             //services.AddDbContext<AppIdentityDbContext>(options =>
             //    options.UseMySql(Environment.GetEnvironmentVariable("IdentityDbString")));
 
+            services.AddDbContext<CrashDbContext>(options =>
+            {
+                options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
+            });
+
+            services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseMySql(Configuration["ConnectionStrings:IdentityDbConnection"]));
+
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
@@ -89,15 +97,21 @@ namespace CarCrash
 
             //services.ConfigureApplicationCookie(options =>
             //{
-                //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-                //options.Cookie.Name = "YourAppCookieName";
-                //options.Cookie.HttpOnly = true;
-                //options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-                //options.LoginPath = "/Identity/Account/Login";
-                // ReturnUrlParameter requires 
-                //options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-                //options.SlidingExpiration = true;
+            //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            //options.Cookie.Name = "YourAppCookieName";
+            //options.Cookie.HttpOnly = true;
+            //options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+            //options.LoginPath = "/Identity/Account/Login";
+            // ReturnUrlParameter requires 
+            //options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+            //options.SlidingExpiration = true;
             //});
+            services.AddDbContext<CrashDbContext>(options =>
+            {
+                options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
+            });
+            services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseMySql(Configuration["ConnectionStrings:IdentityDbConnection"]));
 
             services.AddSingleton<InferenceSession>(
               new InferenceSession("wwwroot/crash.onnx")

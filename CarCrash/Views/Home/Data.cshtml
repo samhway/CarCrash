@@ -5,96 +5,129 @@
 
 <h1 class="my-4">All Crash Data</h1>
 
+<div class='container border rounded shadow mt-3'>
+    <div class="rounded shadow mt-3">
+        <form method="post" asp-action="FilterData">
+            <table class="table table-bordered table-responsive table-sm">
+                <thead class="bg-primary text-white">
 
-
-
-<div class="rounded shadow">
-    <form method="post" asp-action="FilterData">
-        <table  class="table table-bordered table-responsive table-sm">
-            <thead class="bg-primary text-white">
-
-                <tr>
-                    <th>Crash ID<center><input name="ID" type="number" /></center></th>
-                    <th>Crash Datetime<center><input placeholder="Enter a day/time, month, or year!" name="Date" type="datetime" /></center></th>
-                    <th>Route <center><input name="Route" type="number" /></center></th>
-                    <th>Mile Point <center><input name="MP" type="number" /></center></th>
-                    <th>Lattitude<center><input name="Lat" type="number" /></center></th>
-                    <th>Longitude<center><input name="Lon" type="number" /></center></th>
-                    <th>Road Name<center><input type="text" name="Rnam" /></center></th>
-                    <th>Location<center><input placeholder="City, County" name="Loc" type="text" /></center></th>
-                    <th>Crash Severity <center><select name="Sev"><option value=null>All</option><option value=1>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option><option value=5>5</option></select></center></th>
-                    <th>Work Zone Related? <center><select name="WSRel"><option value=true>True</option><option value=false>False</option><option value=null selected>All</option></select></center></th>
-                    <th>Pedestrian Involved? <center><select name="PedInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Cyclist Involved? <center><select name="CycInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Motorcycle Involved? <center><select name="MotInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Improper Restraint?<center><select name="ImpRes"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center> </th>
-                    <th>Unrestrained?<center><select name="Unr"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center> </th>
-                    <th>DUI?<center><select name="DUI"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Intersection Related? <center><select name="IntRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Wild Animal Related? <center><select name="AniRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Domestic Animal Related? <center><select name="DomAniRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Overturned Rollover? <center><select name="OveRol"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Commercial Vehicle Involved? <center><select name="ComVeh"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Teenage Driver Involved? <center><select name="TenDri"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Older Driver Involved? <center><select name="OldDri"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Night Condition? <center><select name="Night"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Single Vehicle? <center><select name="Single"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Distracted Driving? <center><select name="Dist"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Drowsy Driving? <center><select name="Drows"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                    <th>Roadway Departure? <center><select name="Depart"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
-                </tr>
-                <tr>
-                    <th colspan="6"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
-                    <th colspan="9"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
-                    <th colspan="13"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
-
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (Crash c in Model.Crashes)
-                {
                     <tr>
-                        <td>@c.CRASH_ID</td>
-                        <td>@c.CRASH_DATETIME</td>
-                        <td>@c.ROUTE</td>
-                        <td>@c.MILEPOINT</td>
-                        <td>@c.LAT_UTM_Y</td>
-                        <td>@c.LONG_UTM_X</td>
-                        <td>@ViewBag.roads[c.ROAD_ID]</td>
-                        <td>@ViewBag.locations[c.LOCATION_ID]</td>
-                        <td>@c.CRASH_SEVERITY_ID</td>
-                        <td>@c.WORK_ZONE_RELATED</td>
-                        <td>@c.PEDESTRIAN_INVOLVED</td>
-                        <td>@c.BICYCLIST_INVOLVED</td>
-                        <td>@c.MOTORCYCLE_INVOLVED</td>
-                        <td>@c.IMPROPER_RESTRAINT</td>
-                        <td>@c.UNRESTRAINED</td>
-                        <td>@c.DUI</td>
-                        <td>@c.INTERSECTION_RELATED</td>
-                        <td>@c.WILD_ANIMAL_RELATED</td>
-                        <td>@c.DOMESTIC_ANIMAL_RELATED</td>
-                        <td>@c.OVERTURN_ROLLOVER</td>
-                        <td>@c.COMMERCIAL_MOTOR_VEH_INVOLVED</td>
-                        <td>@c.TEENAGE_DRIVER_INVOLVED</td>
-                        <td>@c.OLDER_DRIVER_INVOLVED</td>
-                        <td>@c.NIGHT_DARK_CONDITION</td>
-                        <td>@c.SINGLE_VEHICLE</td>
-                        <td>@c.DISTRACTED_DRIVING</td>
-                        <td>@c.DROWSY_DRIVING</td>
-                        <td>@c.ROADWAY_DEPARTURE</td>
+                        <th>Crash ID<center><input name="ID" type="number" /></center></th>
+                        <th>Crash Datetime<center><input placeholder="Enter a day/time, month, or year!" name="Date" type="datetime" /></center></th>
+                        <th>Route <center><input name="Route" type="number" /></center></th>
+                        <th>Mile Point <center><input name="MP" type="number" /></center></th>
+                        <th>Lattitude<center><input name="Lat" type="number" /></center></th>
+                        <th>Longitude<center><input name="Lon" type="number" /></center></th>
+                        <th>Road Name<center><input type="text" name="Rnam" /></center></th>
+                        <th>Location<center><input placeholder="City, County" name="Loc" type="text" /></center></th>
+                        <th>Crash Severity <center><select name="Sev"><option value=null>All</option><option value=1>1</option><option value=2>2</option><option value=3>3</option><option value=4>4</option><option value=5>5</option></select></center></th>
+                        <th>Work Zone Related? <center><select name="WSRel"><option value=true>True</option><option value=false>False</option><option value=null selected>All</option></select></center></th>
+                        <th>Pedestrian Involved? <center><select name="PedInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Cyclist Involved? <center><select name="CycInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Motorcycle Involved? <center><select name="MotInv"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Improper Restraint?<center><select name="ImpRes"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center> </th>
+                        <th>Unrestrained?<center><select name="Unr"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center> </th>
+                        <th>DUI?<center><select name="DUI"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Intersection Related? <center><select name="IntRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Wild Animal Related? <center><select name="AniRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Domestic Animal Related? <center><select name="DomAniRel"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Overturned Rollover? <center><select name="OveRol"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Commercial Vehicle Involved? <center><select name="ComVeh"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Teenage Driver Involved? <center><select name="TenDri"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Older Driver Involved? <center><select name="OldDri"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Night Condition? <center><select name="Night"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Single Vehicle? <center><select name="Single"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Distracted Driving? <center><select name="Dist"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Drowsy Driving? <center><select name="Drows"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
+                        <th>Roadway Departure? <center><select name="Depart"><option value="True">True</option><option value="False">False</option><option value=null selected>All</option></select></center></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <div class="form-group">
-            <button hidden class="btn btn-success" id="btnSubmit" action="submit">Submit</button>
-        </div>
-    </form>
+                    <tr>
+                        <th colspan="6"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
+                        <th colspan="9"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
+                        <th colspan="13"><center><input type="button" value="Filter" onclick="document.getElementById('btnSubmit').click()" /></center></th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (Crash c in Model.Crashes)
+                    {
+                        <tr>
+                            <td>@c.CRASH_ID</td>
+                            <td>@c.CRASH_DATETIME</td>
+                            <td>@c.ROUTE</td>
+                            <td>@c.MILEPOINT</td>
+                            <td>@c.LAT_UTM_Y</td>
+                            <td>@c.LONG_UTM_X</td>
+                            <td>@ViewBag.roads[c.ROAD_ID]</td>
+                            <td>@ViewBag.locations[c.LOCATION_ID]</td>
+                            <td>@c.CRASH_SEVERITY_ID</td>
+                            <td>@c.WORK_ZONE_RELATED</td>
+                            <td>@c.PEDESTRIAN_INVOLVED</td>
+                            <td>@c.BICYCLIST_INVOLVED</td>
+                            <td>@c.MOTORCYCLE_INVOLVED</td>
+                            <td>@c.IMPROPER_RESTRAINT</td>
+                            <td>@c.UNRESTRAINED</td>
+                            <td>@c.DUI</td>
+                            <td>@c.INTERSECTION_RELATED</td>
+                            <td>@c.WILD_ANIMAL_RELATED</td>
+                            <td>@c.DOMESTIC_ANIMAL_RELATED</td>
+                            <td>@c.OVERTURN_ROLLOVER</td>
+                            <td>@c.COMMERCIAL_MOTOR_VEH_INVOLVED</td>
+                            <td>@c.TEENAGE_DRIVER_INVOLVED</td>
+                            <td>@c.OLDER_DRIVER_INVOLVED</td>
+                            <td>@c.NIGHT_DARK_CONDITION</td>
+                            <td>@c.SINGLE_VEHICLE</td>
+                            <td>@c.DISTRACTED_DRIVING</td>
+                            <td>@c.DROWSY_DRIVING</td>
+                            <td>@c.ROADWAY_DEPARTURE</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="form-group">
+                <button hidden class="btn btn-success" id="btnSubmit" action="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="btn-group pull-right m-2" ani-rel="@ViewBag.AniRel" dom-ani-rel="@ViewBag.DomAniRel" dui="@ViewBag.DUI" mp="@ViewBag.MP" unr="@ViewBag.Unr" imp-res="@ViewBag.ImpRes" route="@ViewBag.Route" dist="@ViewBag.Dist" id="ViewBag.ID" sev="@ViewBag.Sev" depart="@ViewBag.Depart" old-dri="@ViewBag.OldDri" single="@ViewBag.Single" night="@ViewBag.Night" com-veh="@ViewBag.ComVeh" ten-dri="@ViewBag.TenDri" ove-rol="@ViewBag.OveRol" int-rel="@ViewBag.IntRel" date="@ViewBag.Date" drows="@ViewBag.Drows" loc="@ViewBag.Loc" lat="@ViewBag.lat" lon="@ViewBag.lon" rnam="@ViewBag.Rnam" ped-inv="@ViewBag.PedInv" cyc-inv="@ViewBag.CycInv" mot-inv="@ViewBag.MotInv" ws-rel="@ViewBag.WSRel" page-blah="@Model.PageInfo" page-action="Data" page-class="btn"
+         page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+         page-classes-enabled="true">blob</div>
 </div>
 
-<div class="btn-group pull-right m-1" ani-rel="@ViewBag.AniRel" dom-ani-rel="@ViewBag.DomAniRel" dui="@ViewBag.DUI" mp="@ViewBag.MP" unr="@ViewBag.Unr" imp-res="@ViewBag.ImpRes" route="@ViewBag.Route" dist="@ViewBag.Dist" id="ViewBag.ID" sev="@ViewBag.Sev" depart="@ViewBag.Depart" old-dri="@ViewBag.OldDri" single="@ViewBag.Single" night="@ViewBag.Night" com-veh="@ViewBag.ComVeh" ten-dri="@ViewBag.TenDri" ove-rol="@ViewBag.OveRol" int-rel="@ViewBag.IntRel" date="@ViewBag.Date" drows="@ViewBag.Drows" loc="@ViewBag.Loc" lat="@ViewBag.lat" lon="@ViewBag.lon" rnam="@ViewBag.Rnam" ped-inv="@ViewBag.PedInv" cyc-inv="@ViewBag.CycInv" mot-inv="@ViewBag.MotInv" ws-rel="@ViewBag.WSRel" page-blah="@Model.PageInfo" page-action="Data" page-class="btn"
-     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
-     page-classes-enabled="true">blob</div>
+<hr />
 
+<div class='container border rounded shadow'>
+    <div class='tableauPlaceholder my-3' id='viz1649117023908' style='position: relative'>
+        <noscript>
+            <a href='#'>
+                <img alt='Sheet 2 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;KF&#47;KFDJHJ4HW&#47;1_rss.png' style='border: none' />
+            </a>
+        </noscript>
+        <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='path' value='shared&#47;KFDJHJ4HW' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;KF&#47;KFDJHJ4HW&#47;1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en-US' />
+            <param name='filter' value='publish=yes' />
+        </object>
+    </div>
 
+    <script type='text/javascript'>
+        var divElement = document.getElementById('viz1649117023908');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        vizElement.style.width = '100%';
+        vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
+</div>
