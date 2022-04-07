@@ -15,6 +15,8 @@ namespace CarCrash.Models
         private const string adminPassword = "Password123456!";
         private const string userBasic = "yeeter";
         private const string userPassword = "YEETismypassord4!";
+        private const string adminNoMfa = "cooleradmin";
+        private const string adminNoMfaPass = "123456Admin!";
 
         public static async void EnsurePopulated (IApplicationBuilder app)
         {
@@ -33,11 +35,13 @@ namespace CarCrash.Models
 
             IdentityUser user = await userManager.FindByIdAsync(adminUser); 
             IdentityUser user2 = await userManager.FindByIdAsync(userBasic);
+            IdentityUser user3 = await userManager.FindByIdAsync(adminNoMfa);
 
             if (user == null && user2 == null)
             {
                 user = new IdentityUser(adminUser);
                 user2 = new IdentityUser(userBasic);
+                user3 = new IdentityUser(adminNoMfa);
 
                 user.Email = "goten3917@gmail.com";
                 user.PhoneNumber = "555-1234";
@@ -45,8 +49,12 @@ namespace CarCrash.Models
                 user2.Email = "yeeter@yeeter.com";
                 user2.PhoneNumber = "420-1234";
 
+                user3.Email = "yeet@yeet.monster";
+                user3.PhoneNumber = "234-1234";
+
                 await userManager.CreateAsync(user2, userPassword);
                 await userManager.CreateAsync(user, adminPassword);
+                await userManager.CreateAsync(user3, adminNoMfaPass);
             }
         }
     }
