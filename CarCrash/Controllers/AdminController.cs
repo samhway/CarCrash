@@ -82,6 +82,7 @@ namespace CarCrash.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.idNum = repo.Crashes.Select(x => x.CRASH_ID).Max() + 1;
             ViewBag.loc = repo.Locations.ToList();
             ViewBag.road = repo.Roads.ToList();
 
@@ -91,6 +92,10 @@ namespace CarCrash.Controllers
         [HttpPost]
         public IActionResult Create(Crash c)
         {
+            ViewBag.idNum = repo.Crashes.Select(x => x.CRASH_ID).Max() + 1;
+            ViewBag.loc = repo.Locations.ToList();
+            ViewBag.road = repo.Roads.ToList();
+
             if (ModelState.IsValid)
             {
                 repo.Save(c);

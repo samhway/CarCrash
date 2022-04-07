@@ -19,10 +19,20 @@ namespace CarCrash.Models
 
         public void Save(Crash c)
         {
-            if (c.CRASH_ID == 0)
+            var x = true;
+            foreach(var d in Crashes)
+            {
+                if (c.CRASH_ID == d.CRASH_ID)
+                {
+                    x = false;
+                    break;
+                }
+            }
+            if(x == true)
             {
                 context.crashes.Add(c);
             }
+
             
             context.SaveChanges();
         }
