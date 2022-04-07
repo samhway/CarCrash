@@ -47,6 +47,14 @@ namespace CarCrash
             //services.AddDbContext<AppIdentityDbContext>(options =>
             //    options.UseMySql(Environment.GetEnvironmentVariable("IdentityDbString")));
 
+            services.AddDbContext<CrashDbContext>(options =>
+            {
+                options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);
+            });
+
+            services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseMySql(Configuration["ConnectionStrings:IdentityDbConnection"]));
+
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
