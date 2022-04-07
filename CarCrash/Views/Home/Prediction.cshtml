@@ -16,122 +16,144 @@
     <h3 class="mt-3">Crash Severity Calculator</h3>
 
     <form method="post">
-        <div class="form-group d-inline-block">
+        <div class="form-group container">
             <div class="row">
-                <div class="col-4">
-                    <label asp-for="pedestrian_involved" class="d-inline-block">Will there be a pedestrian involved? </label>
+                <div class="col">
+                    <div class="float-left">
+                        <label asp-for="pedestrian_involved" class="d-inline-block">Will there be a pedestrian involved? </label>
+                    </div>
+                    <div class="float-right">
+                        <select asp-for="pedestrian_involved">
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <select asp-for="pedestrian_involved">
-                        <option value=1>Yes</option>
-                        <option value=0>No</option>
-                    </select>
+                <div class="col-1"></div>
+                <div class="col">
+                    <div class="float-left">
+                        <label asp-for="dui">Has the driver been drinking? </label>
+                    </div>
+                    <div class="float-right">
+                        <select asp-for="dui">
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
                 </div>
+                <div class="col-3"></div>
             </div>
             <div class="row">
-                <div class="col-4">
-                    <label asp-for="bicyclist_involved" class="d-inline-block">Will there be a bicyclist involved? </label>
+                <div class="col">
+                    <div class="float-left">
+                        <label asp-for="bicyclist_involved" class="d-inline-block">Will there be a bicyclist involved? </label>
+                    </div>
+                    <div class="float-right">
+                        <select asp-for="bicyclist_involved">
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <select asp-for="bicyclist_involved">
-                        <option value=1>Yes</option>
-                        <option value=0>No</option>
-                    </select>
+                <div class="col-1"></div>
+                <div class="col">
+                    <div class="float-left">
+                        <label asp-for="overturn_rollover">Has the car been overturned? </label>
+                    </div>
+                    <div class="float-right">
+                        <select asp-for="overturn_rollover">
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
                 </div>
+                <div class="col-3"></div>
             </div>
             <div class="row">
-                <div class="col-4">
-                    <label asp-for="motorcycle_involved" class="d-inline-block">Will there be a motorcycle involved? </label>
+                <div class="col">
+                    <div class="float-left">
+                        <label asp-for="motorcycle_involved" class="d-inline-block">Will there be a motorcycle involved? </label>
+                    </div>
+                    <div class="float-right">
+                        <select asp-for="motorcycle_involved">
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <select asp-for="motorcycle_involved">
-                        <option value=1>Yes</option>
-                        <option value=0>No</option>
-                    </select>
+                <div class="col-1"></div>
+                <div class="col">
+                    <div class="float-left">
+                        <label asp-for="intersection_related">Is the crash in an intersection? </label>
+                    </div>
+                    <div class="float-right">
+                        <select asp-for="intersection_related">
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
                 </div>
+                <div class="col-3"></div>
             </div>
             <div class="row">
-                <div class="col-4">
-                    <label asp-for="improper_restraint">Are anyone's seatbelts improperly fastened and/or not up to code? </label>
+                <div class="col">
+                    <div class="float-left">
+                        <label asp-for="improper_restraint">Is anyone using an improper seatbelt? </label>
+                    </div>
+                    <div class="float-right">
+                        <select asp-for="improper_restraint">
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <select asp-for="improper_restraint">
-                        <option value=1>Yes</option>
-                        <option value=0>No</option>
-                    </select>
+                <div class="col-1"></div>
+                <div class="col">
+                    <div class="float-left">
+                        <label asp-for="drowsy_driving">Is the driver sleep-deprived? </label>
+                    </div>
+                    <div class="float-right">
+                        <select asp-for="drowsy_driving">
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
                 </div>
+                <div class="col-3"></div>
             </div>
             <div class="row">
-                <div class="col-4">
-                    <label asp-for="unrestrained">Are anyone's seatbelts not fastened?</label>
+                <div class="col">
+                    <div class="float-left">
+                        <label asp-for="unrestrained">Are anyone's seatbelts not fastened?</label>
+                    </div>
+                    <div class="float-right">
+                        <select asp-for="unrestrained">
+                            <option value=1>Yes</option>
+                            <option value=0>No</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <select asp-for="unrestrained">
-                        <option value=1>Yes</option>
-                        <option value=0>No</option>
-                    </select>
+                <div class="col-1"></div>
+                <div class="col">
+                    <div class="float-left">
+                        <label asp-for="single_vehicle">Is this a multi-car crash? </label>
+                    </div>
+                    <div class="float-right">
+                        <select asp-for="single_vehicle">
+                            <option value=0>Yes</option>
+                            <option value=1>No</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <label asp-for="dui">Has anyone been drinking during this car ride? </label>
-                </div>
-                <div class="col-8">
-                    <select asp-for="dui">
-                        <option value=1>Yes</option>
-                        <option value=0>No</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <label asp-for="overturn_rollover">Has the car been overturned? </label>
-                </div>
-                <div class="col-8">
-                    <select asp-for="overturn_rollover">
-                        <option value=1>Yes</option>
-                        <option value=0>No</option>
-                    </select>
-                </div>
-            </div><br />
-            <div class="row">
-                <div class="col-4">
-                    <label asp-for="intersection_related">Is the crash in an intersection? </label>
-                </div>
-                <div class="col-8">
-                    <select asp-for="intersection_related">
-                        <option value=1>Yes</option>
-                        <option value=0>No</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-4">
-                    <label asp-for="drowsy_driving">Will you be driving late at night or without sleep? </label>
-                </div>
-                <div class="col-8">
-                    <select asp-for="drowsy_driving">
-                        <option value=1>Yes</option>
-                        <option value=0>No</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <label asp-for="single_vehicle">Is this a multi-car crash? </label>
-                </div>
-                <div class="col-8">
-                    <select asp-for="single_vehicle">
-                        <option value=0>Yes</option>
-                        <option value=1>No</option>
-                    </select>
-                </div>
+                <div class="col-3"></div>
             </div>
         </div>
 
-        <div class="form-group">
-            <button class="btn btn-success" action="submit">Submit</button>
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col">
+                <button class="btn btn-success float-left" action="submit">Submit</button>
+            </div>
         </div>
     </form>
 
@@ -153,16 +175,15 @@
 
     @*Google maps stuff*@
     <div id="map"></div>
-
-    <label>Check box if starting location is correct. Then select ending location.</label>
-    <input id="check" type="checkbox" />
-
+    <br />
     <div class="form-group">
         <h4>Starting location</h4>
         <label>Longitude</label>
         <input id="lon" type="text" />
         <label>Latitude</label>
-        <input id="lat" type="text" />
+        <input id="lat" type="text" /><br />
+        <label>Check box if starting location is correct. Then select ending location.</label>
+        <input id="check" type="checkbox" />
 
         <h4>Ending location</h4>
         <label>Longitude</label>
