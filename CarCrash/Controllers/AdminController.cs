@@ -146,7 +146,6 @@ namespace CarCrash.Controllers
         public IActionResult Locations()
         {
             ViewBag.max = repo.Locations.Select(x => x.LOCATION_ID).Max();
-            ViewBag.loc = repo.Locations.ToList();
 
             return View();
         }
@@ -170,7 +169,6 @@ namespace CarCrash.Controllers
         public IActionResult Roads()
         {
             ViewBag.max = repo.Roads.Select(x => x.ROAD_ID).Max();
-            ViewBag.road = repo.Roads.ToList();
 
             return View();
         }

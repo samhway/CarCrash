@@ -8,11 +8,11 @@
 
 <form method="post" asp-controller="Admin" asp-action="Locations">
     <div class="form-group" asp-validation-summary="All">
-        <input type="hidden" asp-for="@Model.LOCATION_ID" value="@(ViewBag.max + 1)"/>
-        <label asp-for="@Model.CITY">City:</label><br />
-        <input asp-for="@Model.CITY" /><br />
-        <label asp-for="@Model.COUNTY_NAME">County:</label><br />
-        <input asp-for="@Model.COUNTY_NAME" /><br />
+        <input type="hidden" asp-for="LOCATION_ID" value="@(ViewBag.max + 1)"/>
+        <label asp-for="CITY">City:</label><br />
+        <input asp-for="CITY" /><br />
+        <label asp-for="COUNTY_NAME">County:</label><br />
+        <input asp-for="COUNTY_NAME" /><br />
     </div>
 
     <div class="form-group">

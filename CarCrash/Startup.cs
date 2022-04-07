@@ -47,6 +47,7 @@ namespace CarCrash
             //services.AddDbContext<AppIdentityDbContext>(options =>
             //    options.UseMySql(Environment.GetEnvironmentVariable("IdentityDbString")));
 
+
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
@@ -139,7 +140,7 @@ namespace CarCrash
             //This is the CSP header stuff. If anything is broken comment this out to debug.
             app.Use(async (context, next) =>
             {
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; style-src 'self' 'unsafe-inline'; style-src-elem * 'unsafe-inline'; script-src 'self' maps.googleapis.com; script-src-elem * 'unsafe-inline'; connect-src https://maps.googleapis.com/; frame-src 'self' https://public.tableau.com/; font-src *; img-src 'self' https://*.googleapis.com https://*.gstatic.com *.google.com  *.googleusercontent.com https://public.tableau.com/ data:");
+                context.Response.Headers.Add("Content-Security-Policy-Report-Only", "default-src 'self'; style-src 'self' 'unsafe-inline'; style-src-elem * 'unsafe-inline'; script-src 'self' maps.googleapis.com 'unsafe-inline'; script-src-elem * 'unsafe-inline'; connect-src https://maps.googleapis.com/ https://mapapidos.herokuapp.com/; frame-src 'self' https://public.tableau.com/; font-src *; img-src 'self' https://*.googleapis.com https://*.gstatic.com *.google.com  *.googleusercontent.com https://public.tableau.com/ data:");
                 await next();
             });
 
