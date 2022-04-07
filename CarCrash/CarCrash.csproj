@@ -6,8 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GoogleAuthenticator" Version="2.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.23" />
+
+    <None Include="wwwroot\crash.onnx" />
+  </ItemGroup>
+
+  <ItemGroup>
+
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.23" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.23" />
