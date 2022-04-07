@@ -4,12 +4,13 @@
 }
 @model Crash
 
-<h3 class="my-3">Add new crash</h3>
+<h3 class="my-3">Edit an existing crash</h3>
 
-<form method="post" asp-controller="Admin" asp-action="Create">
+<form method="post" asp-controller="Admin" asp-action="Edit">
     <div class="form-group">
         <div asp-validation-summary="All"></div>
-        <input asp-for="CRASH_ID" value="@ViewBag.idNum" type="hidden" /><br />
+        <label asp-for="CRASH_ID">Crash ID: </label><br />
+        <input asp-for="CRASH_ID" /><br />
         <label asp-for="CRASH_DATETIME">DateTime (YYYY-MM-DD HH-MM): </label><br />
         <input asp-for="CRASH_DATETIME" /><br />
         <label asp-for="Minute">Minute: </label><br />
@@ -32,7 +33,6 @@
         <input asp-for="LONG_UTM_X" /><br />
         <label asp-for="ROAD_ID">Road: </label><br />
         <select asp-for="ROAD_ID">
-            <option disabled selected>-- SELECT A ROAD --</option>
             @foreach (var r in ViewBag.road)
             {
                 @if (r.MAIN_ROAD_NAME is null)
@@ -48,7 +48,6 @@
         <small class="form-text text-muted">Not finding the road? Add a new road <a target="_blank" asp-controller="Home" asp-action="Roads">here</a></small>
         <label asp-for="LOCATION_ID">Location: </label><br />
         <select asp-for="LOCATION_ID">
-            <option disabled selected>-- SELECT A LOCATION --</option>
             @foreach (var r in ViewBag.loc)
             {
                 @if (r.CITY is null & r.COUNTY_NAME is null)
@@ -72,7 +71,6 @@
         <small class="form-text text-muted">Not finding the location? Add a new location <a target="_blank" asp-controller="Home" asp-action="Locations">here</a></small>
         <label asp-for="CRASH_SEVERITY_ID">Crash Severity: </label><br />
         <select asp-for="CRASH_SEVERITY_ID">
-            <option disabled selected>-- SELECT A CRASH SEVERITY --</option>
             <option value=1>No Injury</option>
             <option value=2>Possible Injury</option>
             <option value=3>Suspected Minor Injury</option>

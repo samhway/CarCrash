@@ -6,9 +6,9 @@
 
 <h3 class="my-3">Add new road</h3>
 
-<form>
+<form method="post" asp-controller="Admin" asp-action="Roads">
     <div class="form-group">
-        <input type="hidden" asp-for="@Model.ROAD_ID" />
+        <input type="hidden" asp-for="@Model.ROAD_ID" value="@(ViewBag.max + 1)"/>
         <label asp-for="@Model.MAIN_ROAD_NAME">Main Road Name:</label><br />
         <input asp-for="@Model.MAIN_ROAD_NAME" /><br />
     </div>
