@@ -47,7 +47,6 @@ namespace CarCrash
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseMySql(Environment.GetEnvironmentVariable("IdentityDbString")));
 
-
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
@@ -87,17 +86,18 @@ namespace CarCrash
                 options.User.RequireUniqueEmail = false;
             });
 
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-            //options.Cookie.Name = "YourAppCookieName";
-            //options.Cookie.HttpOnly = true;
-            //options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-            //options.LoginPath = "/Identity/Account/Login";
-            // ReturnUrlParameter requires 
-            //options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-            //options.SlidingExpiration = true;
-            //});
+            services.ConfigureApplicationCookie(options => //weird cookie stuff
+            {
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.Cookie.Name = "YourAppCookieName";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.LoginPath = "/Identity/Account/Login";
+                //ReturnUrlParameter requires
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
+
             services.AddDbContext<CrashDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:CrashesDbConnection"]);

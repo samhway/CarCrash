@@ -474,6 +474,7 @@ namespace CarCrash.Controllers
                 Crashes = (IOrderedQueryable<Crash>)Crashes.Where(p => RoadNames.Contains(p.ROAD_ID));
             }
             var Crashed = Crashes;
+            var Crashk = Crashes;
             List<int> IdList = new List<int>();
             foreach (Crash c in Crashes)
             {
@@ -489,7 +490,7 @@ namespace CarCrash.Controllers
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumCrashes = Crashed.Count(),
+                    TotalNumCrashes = Crashk.Count(),
                     CrashesPerPage = pageSize,
                     CurrentPage = pageNum
                 }
